@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Palliative Care App</string>
+    <string name="home">الصفحة الرئيسة</string>
+    <string name="chat">الدردشة</string>
+    <string name="person">حسابي</string>
+    <string name="topic">المقالات</string>
+    <string name="notification_add">الاشعارات</string>
 </resources>

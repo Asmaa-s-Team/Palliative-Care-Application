@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".doctor.ChattingScreen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.06">
+
+        <TextView
+            android:id="@+id/patientName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:text="محمد سعيد"
+            android:textColor="@color/primary"
+            android:textSize="20dp" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/chatImageView"
+            android:layout_width="80dp"
+            android:layout_marginRight="15dp"
+            android:layout_height="80dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/primary"
+            app:shapeAppearanceOverlay="@style/circular"
+            app:srcCompat="@drawable/img"
+            >
+
+        </com.google.android.material.imageview.ShapeableImageView>
+
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvMessages"
+        android:layout_width="386dp"
+        android:layout_height="596dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.632" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName3"
+        android:layout_width="278dp"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:hint="أء"
+        android:inputType="textPersonName"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.99" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="90dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/white"
+        android:background=""
+        android:text="إرسال"
+        android:textColor="@color/primary"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.99" />
+</androidx.constraintlayout.widget.ConstraintLayout>
