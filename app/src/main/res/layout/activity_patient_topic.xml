@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:layoutDirection="rtl"
+    android:layout_alignParentRight="true"
+    tools:context=".patient.PatientHome">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="المقال"
+        android:textColor="@color/primary"
+        android:textSize="36dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.035" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/photo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintVertical_bias="0.17"
+                app:shapeAppearanceOverlay="@style/circular"
+                app:srcCompat="@drawable/img"
+                app:strokeColor="@color/primary"
+                app:strokeWidth="1dp">
+
+            </com.google.android.material.imageview.ShapeableImageView>
+
+            <TextView
+                android:id="@+id/topic_description"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:padding="15dp"
+                android:text="التفاصيل"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="المرفقات"
+                android:textColor="@color/primary"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_gravity="start"
+                android:layout_marginStart="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topic_description" />
+
+            <LinearLayout
+                android:id="@+id/layout1"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteY="558dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginHorizontal="10dp"
+                    app:shapeAppearanceOverlay="@style/circular"
+                    app:srcCompat="@drawable/img"
+                    app:strokeColor="@color/primary"></com.google.android.material.imageview.ShapeableImageView>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginHorizontal="10dp"
+                    app:shapeAppearanceOverlay="@style/circular"
+                    app:srcCompat="@drawable/img"
+                    app:strokeColor="@color/primary"></com.google.android.material.imageview.ShapeableImageView>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginHorizontal="10dp"
+                    app:shapeAppearanceOverlay="@style/circular"
+                    app:srcCompat="@drawable/img"
+                    app:strokeColor="@color/primary"></com.google.android.material.imageview.ShapeableImageView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout1">
+
+                <EditText
+                    android:id="@+id/comment"
+                    android:layout_width="310dp"
+                    android:layout_height="58dp"
+                    android:layout_marginEnd="15dp"
+                    android:ems="10"
+                    android:hint="اترك تعليقاً، أو سؤالاً.."
+                    android:inputType="textPersonName"
+                    android:lines="8"
+                    android:maxLines="5"
+                    android:minLines="1"
+                    android:paddingRight="15dp" />
+
+                <Button
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/ic_baseline_send_24"
+                    android:backgroundTint="@color/white" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/send_notification_btn"
+                android:layout_width="204dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/btn_design"
+                android:text="اشتراك"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout2" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
