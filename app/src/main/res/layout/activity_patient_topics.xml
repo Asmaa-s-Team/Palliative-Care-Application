@@ -12,7 +12,7 @@
         android:id="@+id/home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="الرئيسية"
+        android:text="المواضيع"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="26sp"
@@ -21,37 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></TextView>
 
-    <LinearLayout
-        android:id="@+id/layoutt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginHorizontal="15dp"
-        android:background="@drawable/search_btn"
-        app:layout_constraintTop_toBottomOf="@+id/home">
-
-        <EditText
-            android:id="@+id/search"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:paddingVertical="10dp"
-            android:inputType="text"
-            android:paddingRight="20dp"
-            android:hint="بحث"
-            android:textSize="18sp"
-            android:background="@drawable/btn_design4"
-            android:textColorHint="#D1D1D1"
-            ></EditText>
-        <Button
-            android:layout_width="33dp"
-            android:layout_height="33dp"
-            android:background="@drawable/search"
-            android:drawableTint="#E3E3E3"></Button>
-    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
@@ -60,7 +29,7 @@
         android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutt" />
+        app:layout_constraintTop_toBottomOf="@+id/home" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_bar"
@@ -70,6 +39,7 @@
         app:fabCradleRoundedCornerRadius="10dp"
         app:fabCradleVerticalOffset="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
@@ -77,13 +47,11 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:background="@drawable/transparent_background"
-            app:menu="@menu/bottom_nav_menu" >
-
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
+            app:menu="@menu/bottom_nav_menu"></com.google.android.material.bottomnavigation.BottomNavigationView>
     </com.google.android.material.bottomappbar.BottomAppBar>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,36 +4,54 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
+    android:layoutDirection="rtl"
     android:layout_margin="10dp">
 
     <androidx.cardview.widget.CardView
+        app:cardBackgroundColor="#FAFDFF"
+        app:cardCornerRadius="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/topic_name"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="15dp"
-            android:text="ماهي الصحة التلطيفية ؟ "
-            android:paddingRight="20dp"
-            android:textColor="@color/primary"
-            android:textSize="20dp" />
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/topic_logo"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginRight="15dp"
-            app:strokeColor="@color/primary"
-            app:strokeWidth="1dp"
-            android:layout_gravity="right"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             app:shapeAppearanceOverlay="@style/circular"
-            app:srcCompat="@drawable/img"
-            >
-
+            app:srcCompat="@drawable/img">
         </com.google.android.material.imageview.ShapeableImageView>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/topic_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ما هي الصحة التلطيفية؟"
+                    android:textColor="@color/primary"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
 
+                <TextView
+                    android:id="@+id/doctor_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="د. محمد الشرفا"
+                    android:textColor="@color/primary"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 
