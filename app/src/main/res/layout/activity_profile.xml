@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="rtl"
     android:background="@drawable/ic_background"
     tools:context=".authentication.Profile">
 
@@ -56,7 +57,7 @@
                 android:id="@+id/doctor_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="محمد سعيد آل يوسف"
+                android:text="محمد علي آل يوسف"
                 android:textColor="@color/secondary"
                 android:textSize="20dp"
                 android:textStyle="bold"
@@ -102,7 +103,7 @@
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.892"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

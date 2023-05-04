@@ -4,12 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.palliativecareapp.R
 
-class TopicsScreen : AppCompatActivity() {
+class DoctorEditTopic : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_topics_screen)
-
-        // on long Click Lis => delete
-        //swipe => edit and hiding
+        setContentView(R.layout.activity_doctor_edit_topic)
     }
 }

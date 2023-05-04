@@ -1,12 +1,12 @@
-package com.example.palliativecareapp.doctor
+package com.example.palliativecareapp.mutualScreens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.palliativecareapp.R
 
-class AddTopic : AppCompatActivity() {
+class ChatScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_topic)
+        setContentView(R.layout.activity_chat_screen)
     }
 }
