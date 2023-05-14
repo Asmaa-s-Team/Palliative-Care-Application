@@ -28,17 +28,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="الصحة التلطيفية للقلب"
-                android:layout_gravity="center"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="15dp"
                 android:textColor="@color/primary"
                 android:textSize="26dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
-            <TextView
+                <TextView
                     android:id="@+id/doctor_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
                     android:text="د. محمد الشرفا"
                     android:textColor="@color/primary"
                     android:textSize="18dp" />
@@ -124,58 +129,46 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
+                android:background="@drawable/comment_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout1">
 
-                <EditText
-                    android:id="@+id/comment"
-                    android:layout_width="325dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/comment_btn"
-                    android:paddingVertical="13dp"
-                    android:inputType="text"
-                    android:paddingRight="20dp"
-                    android:hint="اترك تعليقاً أو سؤلاً"
-                    android:textColor="@color/primary" />
-
-                <Button
-                    android:layout_width="33dp"
-                    android:layout_height="33dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/ic_baseline_send_24"
-                    android:backgroundTint="@color/white" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="25dp"
-                android:gravity="center">
-
-                <Button
-                    android:id="@+id/subscription_btn"
-                    android:layout_width="200dp"
-                    android:layout_height="56dp"
-                    android:background="@drawable/btn_design"
-                    android:text="اشتراك"
-                    android:textColor="@color/white"
-                    android:layout_marginEnd="20dp"
-                    android:textSize="20dp"/>
-
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/topic_logo"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    app:shapeAppearanceOverlay="@style/circular2"
-                    app:srcCompat="@drawable/coment">
+                    android:id="@+id/patient"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:shapeAppearanceOverlay="@style/circular"
+                    app:srcCompat="@drawable/person">
                 </com.google.android.material.imageview.ShapeableImageView>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginRight="15dp">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="اسم الشخص"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary" />
+                    <TextView
+                        android:id="@+id/comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="التعليق هنا"
+                        android:textSize="15sp"
+                        android:textColor="@color/primary" />
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

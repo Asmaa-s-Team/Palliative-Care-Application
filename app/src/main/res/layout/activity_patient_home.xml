@@ -43,14 +43,13 @@
             android:paddingRight="20dp"
             android:hint="بحث"
             android:textSize="18sp"
-            android:background="@drawable/btn_design4"
-            android:textColorHint="#D1D1D1"
+            android:background="@drawable/search_input"
+            android:textColorHint="@color/primary"
             ></EditText>
         <Button
-            android:layout_width="33dp"
-            android:layout_height="33dp"
-            android:background="@drawable/search"
-            android:drawableTint="#E3E3E3"></Button>
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/search"></Button>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

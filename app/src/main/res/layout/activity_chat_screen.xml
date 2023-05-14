@@ -36,17 +36,16 @@
         android:id="@+id/search"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_design4"
+        android:background="@drawable/search_input"
         android:paddingVertical="10dp"
         android:inputType="text"
         android:paddingRight="20dp"
         android:hint="بحث"
-        android:textColorHint="#BCBCBC"/>
+        android:textColorHint="@color/primary"/>
         <Button
-            android:layout_width="33dp"
-            android:layout_height="33dp"
-            android:background="@drawable/search"
-            android:drawableTint="#E3E3E3"></Button>
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/search"></Button>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/linear_layout"
@@ -58,17 +57,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutt">
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <LinearLayout
             android:id="@+id/all_patients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:layout_marginHorizontal="15dp">
+            android:layout_marginHorizontal="10dp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/chatImageView"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 app:shapeAppearanceOverlay="@style/circular"
                 app:srcCompat="@drawable/ic_baseline_groups_24"
                 app:strokeColor="#000000"
@@ -80,10 +82,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:textSize="20dp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:text="كل الأعضاء"/>
-
         </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RV_doctors"

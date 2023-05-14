@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.236"
         app:shapeAppearanceOverlay="@style/circular"
-        app:srcCompat="@drawable/img"
+        app:srcCompat="@drawable/banner"
         app:strokeColor="@color/primary"
         app:strokeWidth="1dp"></com.google.android.material.imageview.ShapeableImageView>
 
@@ -74,7 +74,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="أء"
+        android:hint="عنوان المقال"
         android:inputType="textPersonName"
         android:paddingRight="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -91,7 +91,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="أء"
+        android:hint="تفاصيل المقال"
         android:inputType="textPersonName"
         android:lines="8"
         android:maxLines="10"
@@ -133,6 +133,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.674" />
+
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.77"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="15dp"
+            android:padding="8dp"
+            android:background="@drawable/circle"
+            app:srcCompat="@drawable/pdf"/>
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="15dp"
+            android:padding="17dp"
+            android:background="@drawable/circle"
+            app:srcCompat="@drawable/image2"/>
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:padding="17dp"
+            android:background="@drawable/circle"
+            android:layout_marginLeft="15dp"
+            app:srcCompat="@drawable/link" />
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:padding="13dp"
+            android:background="@drawable/circle"
+            app:srcCompat="@drawable/video"/>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/send_notification_btn"
