@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login_doctor.*
 
 class LoginDoctor : AppCompatActivity() {
     lateinit var sharedPreferences : SharedPreferences
@@ -62,17 +62,9 @@ class LoginDoctor : AppCompatActivity() {
                     Toast.makeText(baseContext, "Authentication success.",
                         Toast.LENGTH_SHORT).show()
                     val user = auth.currentUser
-                    val userType = sharedPreferences.getString("userType", "error")
-                    if(userType!!.equals("doctor")) {
-                        val editor = sharedPreferences.edit()
-                        editor.putString("userType", "doctorLogin")
-                        editor.apply()
-                    }
-                    if(userType!!.equals("patient")) {
-                        val editor = sharedPreferences.edit()
-                        editor.putString("userType", "patientLogin")
-                        editor.apply()
-                    }
+                    val editor = sharedPreferences.edit()
+                    editor.putString("doctor", "login")
+                    editor.apply()
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("User:signInWithEmail", "signInWithEmail:failure", task.exception)

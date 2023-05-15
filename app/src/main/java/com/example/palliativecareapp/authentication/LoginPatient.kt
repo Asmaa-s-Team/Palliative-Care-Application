@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login_patient.*
 
 class LoginPatient : AppCompatActivity() {
     lateinit var sharedPreferences : SharedPreferences
@@ -29,7 +29,8 @@ class LoginPatient : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_login_patient)
+
         sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         auth = Firebase.auth
         val email = email.text
@@ -37,6 +38,8 @@ class LoginPatient : AppCompatActivity() {
         buttonLogin.setOnClickListener {
             if(email.isNotEmpty() && password.isNotEmpty()){
                     signInWithEmailAndPassword(email.toString(),password.toString())
+                var i = Intent(this, PatientHome::class.java)
+                startActivity(i)
                     Toast.makeText(baseContext, "LogIn Success.",
                         Toast.LENGTH_SHORT).show()
                 }
@@ -59,18 +62,9 @@ class LoginPatient : AppCompatActivity() {
                     Toast.makeText(baseContext, "Authentication success.",
                         Toast.LENGTH_SHORT).show()
                     val user = auth.currentUser
-                    val userType = sharedPreferences.getString("userType", "error")
-                    if(userType!!.equals("doctor")) {
-                        val editor = sharedPreferences.edit()
-                        editor.putString("userType", "doctorLogin")
-                        editor.apply()
-                    }
-                    if(userType!!.equals("patient")) {
-                        val editor = sharedPreferences.edit()
-                        editor.putString("userType", "patientLogin")
-                        editor.apply()
-                    }
-                    updateUI(user)
+                    val editor = sharedPreferences.edit()
+                    editor.putString("patient", "login")
+                    editor.apply()
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("User:signInWithEmail", "signInWithEmail:failure", task.exception)
@@ -81,15 +75,19 @@ class LoginPatient : AppCompatActivity() {
             }
     }
     private fun updateUI(user: FirebaseUser?) {
-        val userType = sharedPreferences.getString("patient", "error")
-        if(userType!!.equals("login")){
+        val patient = sharedPreferences.getString("patient", "error")
+        if(patient!!.equals("login")){
             val editor = sharedPreferences.edit()
             editor.putString("userEmail", user!!.email)
             editor.putString("userId", user.uid)
             editor.apply()
-            var i = Intent(this, DoctorHome::class.java)
+            var i = Intent(this, PatientHome::class.java)
             i.putExtra("email",user!!.email)
             i.putExtra("id",user.uid)
+            startActivity(i)
+        }
+        if(patient!!.equals("register")) {
+            var i = Intent(this, LoginDoctor::class.java)
             startActivity(i)
         }
     }

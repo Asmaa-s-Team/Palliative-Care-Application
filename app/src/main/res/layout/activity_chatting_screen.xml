@@ -29,12 +29,12 @@
             app:strokeColor="@color/primary"></com.google.android.material.imageview.ShapeableImageView>
 
         <TextView
-            android:id="@+id/patientName"
+            android:id="@+id/chatName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginRight="10dp"
-            android:text="محمد علي"
+            android:text=""
             android:textColor="@color/primary"
             android:textSize="20dp" />
 
@@ -71,12 +71,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/messageInput"
         android:layout_width="330dp"
         android:layout_height="60dp"
         android:layout_marginBottom="10dp"
         android:hint="اكتب رسالة"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:padding="16dp" />
     <Button
         android:id="@+id/send_btn"

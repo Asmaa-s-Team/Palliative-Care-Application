@@ -13,13 +13,14 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.palliativecareapp.R
+import com.example.palliativecareapp.doctor.DoctorHome
 import com.example.palliativecareapp.patient.PatientHome
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_register_patient.*
 import java.util.*
 
 
@@ -38,7 +39,7 @@ class RegisterPatient : AppCompatActivity() {
     private var dateButton: Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_register_patient)
         sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         initDatePicker();
         dateButton = findViewById(R.id.datePickerBtn);
@@ -126,9 +127,15 @@ class RegisterPatient : AppCompatActivity() {
 
     }
     private fun updateUI(user: FirebaseUser?) {
-        val doctor = sharedPreferences.getString("patient", "error")
-        if(doctor!!.equals("login")) {
+        val patient = sharedPreferences.getString("patient", "error")
+        if(patient!!.equals("login")) {
+            val editor = sharedPreferences.edit()
+            editor.putString("userEmail", user!!.email)
+            editor.putString("userId", user.uid)
+            editor.apply()
             var i = Intent(this, PatientHome::class.java)
+            i.putExtra("email",user!!.email)
+            i.putExtra("id",user.uid)
             startActivity(i)
         }
     }

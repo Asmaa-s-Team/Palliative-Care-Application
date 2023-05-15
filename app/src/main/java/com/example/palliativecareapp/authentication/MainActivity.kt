@@ -1,16 +1,28 @@
-package com.example.palliativecareapp
+package com.example.palliativecareapp.authentication
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.palliativecareapp.authentication.RegisterDoctor
-import com.example.palliativecareapp.authentication.RegisterPatient
+import com.example.palliativecareapp.R
+import com.example.palliativecareapp.doctor.DoctorHome
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var sharedPreferences : SharedPreferences
+    private lateinit var auth: FirebaseAuth
+
+    override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if(currentUser != null){
+            updateUI(currentUser)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,6 +42,18 @@ class MainActivity : AppCompatActivity() {
             editor.putString("doctor", "doctor")
             editor.apply()
             var i = Intent(this, RegisterDoctor::class.java)
+            startActivity(i)
+        }
+    }
+    private fun updateUI(user: FirebaseUser?) {
+        val doctor = sharedPreferences.getString("doctor", "error")
+        val patient = sharedPreferences.getString("patient", "error")
+        if(doctor!!.equals("login")) {
+            var i = Intent(this, DoctorHome::class.java)
+            startActivity(i)
+        }
+        if(doctor!!.equals("register")) {
+            var i = Intent(this, LoginDoctor::class.java)
             startActivity(i)
         }
     }

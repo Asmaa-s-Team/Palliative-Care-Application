@@ -36,6 +36,7 @@ class RegisterDoctor : AppCompatActivity() {
     }
     private var datePickerDialog: DatePickerDialog? = null
     private var dateButton: Button? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_doctor)
@@ -49,6 +50,7 @@ class RegisterDoctor : AppCompatActivity() {
         val email = email.text
         val password = password.text
         val confirmPassword = confirmPassword.text
+
         buttonSignUp.setOnClickListener {
             if(email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()){
                 if (password.toString().equals(confirmPassword.toString())) {
@@ -58,6 +60,8 @@ class RegisterDoctor : AppCompatActivity() {
                     createNewAccount(email.toString(), password.toString())
                     var i = Intent(this, LoginDoctor::class.java)
                     startActivity(i)
+                    Toast.makeText(baseContext, "Authentication Success.",
+                        Toast.LENGTH_SHORT).show()
                 }
                 else{
                     Toast.makeText(baseContext, "Password not Match.",
@@ -115,8 +119,6 @@ class RegisterDoctor : AppCompatActivity() {
                     editor.putString("doctor", "register")
                     editor.apply()
 
-                    Toast.makeText(baseContext, "Authentication Success.",
-                        Toast.LENGTH_SHORT).show()
                 } else {
                     Log.w("User:createUser", "createUserWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
@@ -130,16 +132,16 @@ class RegisterDoctor : AppCompatActivity() {
     private fun updateUI(user: FirebaseUser?) {
         val doctor = sharedPreferences.getString("doctor", "error")
         if(doctor!!.equals("login")) {
+            val editor = sharedPreferences.edit()
+            editor.putString("userEmail", user!!.email)
+            editor.putString("userId", user.uid)
+            editor.apply()
             var i = Intent(this, DoctorHome::class.java)
-            startActivity(i)
-        }
-        if(doctor!!.equals("doctor")) {
-            var i = Intent(this, LoginDoctor::class.java)
+            i.putExtra("email",user!!.email)
+            i.putExtra("id",user.uid)
             startActivity(i)
         }
     }
-
-
 
 
     private fun getTodaysDate(): String? {
