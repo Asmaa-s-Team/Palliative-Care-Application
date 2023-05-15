@@ -8,66 +8,192 @@
     android:gravity="center_horizontal"
     tools:context=".authentication.Register">
 
-    <EditText
-        android:id="@+id/emailSignUp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:minHeight="48dp" />
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:padding="20dp"
+        android:src="@drawable/logo2" />
 
-    <EditText
-        android:id="@+id/passwordSignUp"
-        android:layout_width="300dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:minHeight="48dp" />
-
-    <EditText
-        android:id="@+id/confirmePasswordSignUp"
-        android:layout_width="300dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+        <EditText
+        android:id="@+id/first"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:ems="10"
-        android:hint="Confirm password"
-        android:inputType="textPassword"
+        android:hint="الاسم الأوسط"
+            android:textColorHint="#566E8A"
+            android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:inputType="textPersonName"
         android:minHeight="48dp" />
+        <EditText
+            android:id="@+id/middle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_margin="10dp"
+            android:hint="الاسم الأول"
+            android:textColorHint="#566E8A"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="العنوان"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:inputType="text"
+            android:textColorHint="#566E8A"
+            android:minHeight="48dp" />
+        <EditText
+            android:id="@+id/last"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_margin="10dp"
+            android:hint="اسم العائلة"
+            android:textColorHint="#566E8A"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+        <Button
+            android:id="@+id/datePickerBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="JAN 01 2020"
+            android:textSize="18sp"
+            android:textColor="#566E8A"
+            style="?android:spinnerStyle"
+            android:onClick="openDatePicker"
+            android:minHeight="48dp" />
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:textColor="#566E8A"
+            android:layout_margin="10dp"
+            android:text="حدد تاريخ الميلاد"
+            android:minHeight="48dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="البريد الالكتروني"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:textColorHint="#566E8A"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp" />
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_margin="10dp"
+            android:hint="رقم الهاتف"
+            android:inputType="number"
+            android:textColorHint="#566E8A"
+            android:minHeight="48dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+        <EditText
+            android:id="@+id/confirmPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="تأكيد كلمة المرور"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:textColorHint="#566E8A"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_margin="10dp"
+            android:hint="كلمة المرور"
+            android:inputType="textPersonName"
+            android:textColorHint="#566E8A"
+            android:minHeight="48dp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/buttonSignUp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_width="300dp"
+        android:textSize="20sp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_design"
-        android:text="Sign Up" />
+        android:paddingVertical="8dp"
+        android:text="إنشاء حساب" />
 
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="40dp"
         android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:text="You have an account? " />
-
         <TextView
             android:id="@+id/loginSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:padding="0dp"
+            android:layout_marginRight="5dp"
             android:backgroundTint="@color/white"
             android:textColor="@android:color/black"
-            android:text=" Login" />
+            android:text="تسجيل دخول" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="لديك حساب بالفعل؟" />
+
+
     </LinearLayout>
 </LinearLayout>
