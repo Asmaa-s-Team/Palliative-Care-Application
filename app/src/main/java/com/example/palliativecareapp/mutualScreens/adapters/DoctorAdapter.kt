@@ -41,7 +41,6 @@ class DoctorAdapter (private val list: ArrayList<Doctor>, var context: Context) 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //هنا بحط كود الضغط على الكاردة
         val current = list[position]
         holder.name.text = current.name
 

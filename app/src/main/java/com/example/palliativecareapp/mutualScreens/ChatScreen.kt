@@ -31,7 +31,7 @@ class ChatScreen : AppCompatActivity() {
                 for (document in result) {
                     doctors.add(
                         Doctor(
-                            document.id.toInt(),
+                            document.id,
                             document.getString("name"),
                             document.getString("image"),
                         )

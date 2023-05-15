@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.palliativecareapp.R
 import com.example.palliativecareapp.doctor.DoctorHome
+import com.example.palliativecareapp.patient.PatientHome
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
@@ -17,10 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val currentUser = auth.currentUser
-        if(currentUser != null){
-            updateUI(currentUser)
-        }
+            updateUI()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(i)
         }
     }
-    private fun updateUI(user: FirebaseUser?) {
+    private fun updateUI() {
         val doctor = sharedPreferences.getString("doctor", "error")
         val patient = sharedPreferences.getString("patient", "error")
         if(doctor!!.equals("login")) {
@@ -54,6 +52,14 @@ class MainActivity : AppCompatActivity() {
         }
         if(doctor!!.equals("register")) {
             var i = Intent(this, LoginDoctor::class.java)
+            startActivity(i)
+        }
+        if(patient!!.equals("login")) {
+            var i = Intent(this, PatientHome::class.java)
+            startActivity(i)
+        }
+        if(patient!!.equals("register")) {
+            var i = Intent(this, LoginPatient::class.java)
             startActivity(i)
         }
     }

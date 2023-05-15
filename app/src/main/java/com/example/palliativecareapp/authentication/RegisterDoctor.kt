@@ -75,7 +75,7 @@ class RegisterDoctor : AppCompatActivity() {
 
         }
         loginSignUp.setOnClickListener {
-            val i = Intent(this, LoginPatient::class.java)
+            val i = Intent(this, LoginDoctor::class.java)
             startActivity(i)
         }
     }

@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.activity_login_doctor.*
 
 class LoginDoctor : AppCompatActivity() {
     lateinit var sharedPreferences : SharedPreferences
-
     private lateinit var auth: FirebaseAuth
     override fun onStart() {
         super.onStart()
@@ -40,8 +39,6 @@ class LoginDoctor : AppCompatActivity() {
                     signInWithEmailAndPassword(email.toString(),password.toString())
                     Toast.makeText(baseContext, "LogIn Success.",
                         Toast.LENGTH_SHORT).show()
-                var i = Intent(this, DoctorHome::class.java)
-                startActivity(i)
                 }
                 else{
                     Toast.makeText(baseContext, "LogIn Failed. Please enter the EMPTY Fields .",
@@ -49,7 +46,7 @@ class LoginDoctor : AppCompatActivity() {
                 }
         }
         signLogin.setOnClickListener {
-            val i = Intent(this, RegisterPatient::class.java)
+            val i = Intent(this, RegisterDoctor::class.java)
             startActivity(i)
         }
         }
@@ -65,6 +62,7 @@ class LoginDoctor : AppCompatActivity() {
                     val editor = sharedPreferences.edit()
                     editor.putString("doctor", "login")
                     editor.apply()
+                    updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("User:signInWithEmail", "signInWithEmail:failure", task.exception)
@@ -86,7 +84,7 @@ class LoginDoctor : AppCompatActivity() {
             i.putExtra("id",user.uid)
             startActivity(i)
         }
-        if(doctor!!.equals("register")) {
+        if(doctor!!.equals("register")){
             var i = Intent(this, LoginDoctor::class.java)
             startActivity(i)
         }
