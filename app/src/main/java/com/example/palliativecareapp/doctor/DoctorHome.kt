@@ -20,7 +20,7 @@ class DoctorHome : AppCompatActivity() {
         var last =""
         var id = intent.getStringExtra("id")
         db = Firebase.firestore
-        db.collection("users").document(id!!).get().addOnSuccessListener { result ->
+        db.collection("doctors").document(id!!).get().addOnSuccessListener { result ->
             var data = result.data
             var hash = data?.get("name") as? HashMap<String, Any>
              first = hash?.get("first").toString()

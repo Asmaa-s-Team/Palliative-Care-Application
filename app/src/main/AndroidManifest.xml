@@ -24,8 +24,23 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity><activity
+        </activity>
+        <activity
             android:name=".doctor.DoctorEditTopic"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".authentication.LoginDoctor"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".authentication.RegisterDoctor"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -90,14 +105,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".authentication.Login"
+            android:name=".authentication.LoginPatient"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".authentication.Register"
+            android:name=".authentication.RegisterPatient"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

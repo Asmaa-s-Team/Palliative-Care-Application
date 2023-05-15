@@ -14,17 +14,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.palliativecareapp.R
 import com.example.palliativecareapp.doctor.DoctorHome
-import com.example.palliativecareapp.patient.PatientHome
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_register_doctor.*
 import java.util.*
 
 
-class Register : AppCompatActivity() {
+class RegisterDoctor : AppCompatActivity() {
     lateinit var sharedPreferences : SharedPreferences
     lateinit var date : String
     private lateinit var auth: FirebaseAuth
@@ -39,7 +38,8 @@ class Register : AppCompatActivity() {
     private var dateButton: Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_register_doctor)
+
         sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         initDatePicker();
         dateButton = findViewById(R.id.datePickerBtn);
@@ -56,6 +56,8 @@ class Register : AppCompatActivity() {
                     Log.e("user password", password.toString())
                     Log.e("user confirm password", confirmPassword.toString())
                     createNewAccount(email.toString(), password.toString())
+                    var i = Intent(this, LoginDoctor::class.java)
+                    startActivity(i)
                 }
                 else{
                     Toast.makeText(baseContext, "Password not Match.",
@@ -69,7 +71,7 @@ class Register : AppCompatActivity() {
 
         }
         loginSignUp.setOnClickListener {
-            val i = Intent(this, Login::class.java)
+            val i = Intent(this, LoginPatient::class.java)
             startActivity(i)
         }
     }
@@ -84,7 +86,7 @@ class Register : AppCompatActivity() {
 
                     // save user info
                     val db = Firebase.firestore
-                    val userRef = db.collection("users").document(user!!.uid)
+                    val userRef = db.collection("doctors").document(user!!.uid)
 
                     val fullName = hashMapOf(
                         "first" to first.text.toString(),
@@ -108,7 +110,11 @@ class Register : AppCompatActivity() {
                         .addOnFailureListener { exception ->
                             Log.e("user info", "Failed")
                         }
-                    updateUI(user)
+
+                    val editor = sharedPreferences.edit()
+                    editor.putString("doctor", "register")
+                    editor.apply()
+
                     Toast.makeText(baseContext, "Authentication Success.",
                         Toast.LENGTH_SHORT).show()
                 } else {
@@ -122,9 +128,19 @@ class Register : AppCompatActivity() {
 
     }
     private fun updateUI(user: FirebaseUser?) {
-            var i = Intent(this, Login::class.java)
+        val doctor = sharedPreferences.getString("doctor", "error")
+        if(doctor!!.equals("login")) {
+            var i = Intent(this, DoctorHome::class.java)
             startActivity(i)
+        }
+        if(doctor!!.equals("doctor")) {
+            var i = Intent(this, LoginDoctor::class.java)
+            startActivity(i)
+        }
     }
+
+
+
 
     private fun getTodaysDate(): String? {
         val cal: Calendar = Calendar.getInstance()

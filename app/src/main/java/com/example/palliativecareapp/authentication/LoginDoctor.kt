@@ -16,7 +16,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
 
-class Login : AppCompatActivity() {
+class LoginDoctor : AppCompatActivity() {
     lateinit var sharedPreferences : SharedPreferences
 
     private lateinit var auth: FirebaseAuth
@@ -29,7 +29,8 @@ class Login : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_login_doctor)
+
         sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         auth = Firebase.auth
         val email = email.text
@@ -39,6 +40,8 @@ class Login : AppCompatActivity() {
                     signInWithEmailAndPassword(email.toString(),password.toString())
                     Toast.makeText(baseContext, "LogIn Success.",
                         Toast.LENGTH_SHORT).show()
+                var i = Intent(this, DoctorHome::class.java)
+                startActivity(i)
                 }
                 else{
                     Toast.makeText(baseContext, "LogIn Failed. Please enter the EMPTY Fields .",
@@ -46,7 +49,7 @@ class Login : AppCompatActivity() {
                 }
         }
         signLogin.setOnClickListener {
-            val i = Intent(this, Register::class.java)
+            val i = Intent(this, RegisterPatient::class.java)
             startActivity(i)
         }
         }
@@ -70,7 +73,6 @@ class Login : AppCompatActivity() {
                         editor.putString("userType", "patientLogin")
                         editor.apply()
                     }
-                    updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("User:signInWithEmail", "signInWithEmail:failure", task.exception)
@@ -81,26 +83,20 @@ class Login : AppCompatActivity() {
             }
     }
     private fun updateUI(user: FirebaseUser?) {
-        val userType = sharedPreferences.getString("userType", "error")
-        if(userType!!.equals("doctorLogin")){
+        val doctor = sharedPreferences.getString("doctor", "error")
+        if(doctor!!.equals("login")){
             val editor = sharedPreferences.edit()
-            editor.putString("doctorEmail", user!!.email)
-            editor.putString("doctorId", user.uid)
+            editor.putString("userEmail", user!!.email)
+            editor.putString("userId", user.uid)
             editor.apply()
             var i = Intent(this, DoctorHome::class.java)
             i.putExtra("email",user!!.email)
             i.putExtra("id",user.uid)
             startActivity(i)
         }
-        if(userType!!.equals("patientLogin")){
-            val editor = sharedPreferences.edit()
-            editor.putString("patientEmail", user!!.email)
-            editor.putString("patientId", user.uid)
-            var i = Intent(this, PatientHome::class.java)
-            i.putExtra("patientEmail",user!!.email)
-            i.putExtra("patientId",user.uid)
+        if(doctor!!.equals("register")) {
+            var i = Intent(this, LoginDoctor::class.java)
             startActivity(i)
         }
-
     }
 }
