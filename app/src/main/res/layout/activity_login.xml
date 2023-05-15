@@ -33,9 +33,10 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="كلمة المرور"
+        android:gravity="right"
         android:layout_marginHorizontal="20dp"
         android:textColorHint="#566E8A"
-        android:inputType="textEmailAddress"
+        android:inputType="textPassword"
         android:minHeight="48dp" />
 
     <Button

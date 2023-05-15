@@ -23,7 +23,7 @@
         android:orientation="horizontal"
         android:layout_marginBottom="10dp">
         <EditText
-        android:id="@+id/first"
+        android:id="@+id/middle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -34,7 +34,7 @@
         android:inputType="textPersonName"
         android:minHeight="48dp" />
         <EditText
-            android:id="@+id/middle"
+            android:id="@+id/first"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -145,8 +145,10 @@
             android:hint="تأكيد كلمة المرور"
             android:layout_margin="10dp"
             android:layout_weight="1"
+            android:gravity="right"
+
             android:textColorHint="#566E8A"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             android:minHeight="48dp" />
         <EditText
             android:id="@+id/password"
@@ -156,7 +158,8 @@
             android:ems="10"
             android:layout_margin="10dp"
             android:hint="كلمة المرور"
-            android:inputType="textPersonName"
+            android:gravity="right"
+            android:inputType="textPassword"
             android:textColorHint="#566E8A"
             android:minHeight="48dp" />
     </LinearLayout>
