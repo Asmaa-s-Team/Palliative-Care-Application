@@ -46,8 +46,8 @@ class GroupChattingScreen : AppCompatActivity() {
         val first = sharedPreferences.getString("first", "")
         val middle = sharedPreferences.getString("middle", "")
         val last = sharedPreferences.getString("last", "")
-//            senderName = "$first $middle $last"
-            senderName = " علي محمد أحمد"
+            senderName = "$first $middle $last"
+//            senderName = " علي محمد أحمد"
             senderUid = user!!.uid
 
             messagesAdapter = GroupMessageAdapter(this, messagesList, senderUid)

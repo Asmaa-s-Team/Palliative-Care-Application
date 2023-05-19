@@ -6,7 +6,12 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.palliativecareapp.R
+import com.example.palliativecareapp.adapters.TopicAdapter
+import com.example.palliativecareapp.models.Topic
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -54,8 +59,60 @@ class DoctorHome : AppCompatActivity() {
         editor.apply()
 
         add_topic.setOnClickListener {
-            val i = Intent(this, DoctorChat::class.java)
+            val i = Intent(this, DoctorAddTopic::class.java)
             startActivity(i)
         }
+
+        val topics = ArrayList<Topic>()
+        val myAdapter = TopicAdapter(topics, this)
+        lvTopics.layoutManager = LinearLayoutManager(this)
+        lvTopics.adapter = myAdapter
+
+        var doctorId = ""
+        val db = FirebaseFirestore.getInstance()
+        val query = db.collection("topics")
+            .whereEqualTo("autherId", doctorId)
+        query.get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot.documents) {
+                    topics.add(
+                        Topic(
+                            document.id,
+                            document.getString("logo").toString(),
+                            document.getString("name").toString(),
+                            document.getString("description").toString(),
+                        )
+                    )
+                    Log.e("success", "${document.id} => ${document.data}")
+                }
+                myAdapter.notifyDataSetChanged()
+                if (topics.isEmpty()) {
+                    progressBar.isIndeterminate = true
+                    progressBar.visibility = View.VISIBLE
+                } else {
+                    progressBar.isIndeterminate = false
+                    progressBar.visibility = View.GONE
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.e("error", "Error getting topics", exception)
+                Toast.makeText(this, "There is an error getting topics", Toast.LENGTH_SHORT)
+            }
+        if (topics.isEmpty()) {
+            progressBar.isIndeterminate = true
+            progressBar.visibility = View.VISIBLE
+        } else {
+            progressBar.isIndeterminate = false
+            progressBar.visibility = View.GONE
+        }
+
+        myAdapter.onItemClickListener(object : TopicAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                val intent = Intent(this@DoctorHome, DoctorTopic::class.java)
+                intent.putExtra("topicId", topics[position].id)
+                print(topics[position].id)
+                startActivity(intent)
+            }
+        })
     }
 }

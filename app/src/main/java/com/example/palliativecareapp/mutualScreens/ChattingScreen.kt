@@ -44,7 +44,6 @@ class ChattingScreen : AppCompatActivity() {
         var user = auth.currentUser
         val userId = intent.getStringExtra("userId")
 
-
         val db = FirebaseFirestore.getInstance()
         val doctorDocumentRef = db.collection("doctors").document(userId!!)
         val patientDocumentRef = db.collection("patients").document(userId!!)

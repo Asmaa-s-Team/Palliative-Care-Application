@@ -7,7 +7,7 @@
     android:gravity="center_vertical"
     android:layoutDirection="rtl"
     android:layout_alignParentRight="true"
-    tools:context=".patient.PatientHome">
+    tools:context=".doctor.DoctorTopic">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             android:gravity="center_horizontal">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/topic_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="الصحة التلطيفية للقلب"
@@ -32,24 +32,10 @@
                 android:layout_marginTop="15dp"
                 android:textColor="@color/primary"
                 android:textSize="26dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-
-                <TextView
-                    android:id="@+id/doctor_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:text="د. محمد الشرفا"
-                    android:textColor="@color/primary"
-                    android:textSize="18dp" />
+                android:textStyle="bold"/>
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/topic_logo"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="15dp"
@@ -58,7 +44,7 @@
             <TextView
                 android:id="@+id/topic_description"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="15dp"
                 android:ems="10"
@@ -107,10 +93,10 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:padding="17dp"
+                    android:padding="15dp"
                     android:background="@drawable/circle"
                     android:layout_marginLeft="15dp"
-                    app:srcCompat="@drawable/link" />
+                    app:srcCompat="@drawable/ic_baseline_bar_chart_24" />
 
                 <ImageView
                     android:layout_width="70dp"
@@ -121,52 +107,13 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/layout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="20dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:background="@drawable/comment_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout1">
+           <androidx.recyclerview.widget.RecyclerView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="15dp"
+               android:layout_marginHorizontal="5dp">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/patient"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    app:shapeAppearanceOverlay="@style/circular"
-                    app:srcCompat="@drawable/person">
-                </com.google.android.material.imageview.ShapeableImageView>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginRight="15dp">
-
-                    <TextView
-                        android:id="@+id/name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="اسم الشخص"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/primary" />
-                    <TextView
-                        android:id="@+id/comment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="التعليق هنا"
-                        android:textSize="15sp"
-                        android:textColor="@color/primary" />
-                </LinearLayout>
-
-            </LinearLayout>
+           </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
     </ScrollView>
