@@ -1,8 +1,8 @@
 package com.example.palliativecareapp.mutualScreens.models
 
-class Message (
+class GroupMessage (
         val text: String = "",
         val senderId: String = "",
-        val receiverId :String = "",
+        val senderName: String = "",
         val timestamp: String = ""
     )

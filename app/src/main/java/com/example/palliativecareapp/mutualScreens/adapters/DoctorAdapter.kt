@@ -30,7 +30,6 @@ class DoctorAdapter (private val list: ArrayList<Doctor>, var context: Context) 
                 listener.onItemClick(adapterPosition)
             }
         }
-
         val name = itemView.name
         val image = itemView.image
     }
@@ -42,7 +41,11 @@ class DoctorAdapter (private val list: ArrayList<Doctor>, var context: Context) 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val current = list[position]
-        holder.name.text = current.name
+        var hash = current.name as HashMap<Any, Any>
+        var first = hash.get("first").toString()
+        var middle = hash.get("middle").toString()
+        var last = hash.get("last").toString()
+        holder.name.text = "$first $middle $last"
 
 //        Glide.with(context).load(current.image).into(holder.image)
 //        Picasso.with(context).load(current.image).into(holder.image)

@@ -4,19 +4,19 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:layoutDirection="rtl"
-    android:layout_margin="10dp">
+    android:layoutDirection="rtl">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="15dp">
+        android:outlineSpotShadowColor="@color/primary"
+        android:layout_margin="2dp"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:gravity="center_vertical">
 
             <com.google.android.material.imageview.ShapeableImageView
@@ -32,7 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
-                    android:text="أحمد الأحمد"
+                    android:text=""
                     android:textColor="@color/primary"
                     android:textSize="18dp" />
 
