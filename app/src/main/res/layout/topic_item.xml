@@ -42,12 +42,12 @@
                     android:textStyle="bold"/>
 
                 <TextView
-                    android:id="@+id/doctor_name"
+                    android:id="@+id/description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="د. محمد الشرفا"
+                    android:text="الوصف"
                     android:textColor="@color/primary"
-                    android:textSize="18dp" />
+                    android:textSize="16dp" />
             </LinearLayout>
 
 

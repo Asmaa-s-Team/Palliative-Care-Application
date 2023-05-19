@@ -1,4 +1,4 @@
-package com.example.palliativecareapp.mutualScreens.models
+package com.example.palliativecareapp.models
 
 class Message (
         val text: String = "",

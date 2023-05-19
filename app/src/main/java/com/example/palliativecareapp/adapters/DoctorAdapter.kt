@@ -1,4 +1,4 @@
-package com.example.palliativecareapp.mutualScreens.adapters
+package com.example.palliativecareapp.adapters
 
 import android.content.Context
 import android.graphics.BitmapFactory
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.module.AppGlideModule
 import com.example.palliativecareapp.R
-import com.example.palliativecareapp.mutualScreens.models.Doctor
+import com.example.palliativecareapp.models.Doctor
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.chat_search_item.view.*

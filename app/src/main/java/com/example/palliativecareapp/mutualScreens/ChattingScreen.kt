@@ -10,8 +10,8 @@ import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.palliativecareapp.R
-import com.example.palliativecareapp.mutualScreens.adapters.MessageAdapter
-import com.example.palliativecareapp.mutualScreens.models.Message
+import com.example.palliativecareapp.adapters.MessageAdapter
+import com.example.palliativecareapp.models.Message
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import kotlinx.android.synthetic.main.activity_chatting_screen.*

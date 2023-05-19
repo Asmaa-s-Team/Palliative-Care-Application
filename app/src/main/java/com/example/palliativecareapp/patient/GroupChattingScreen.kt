@@ -1,4 +1,4 @@
-package com.example.palliativecareapp.mutualScreens
+package com.example.palliativecareapp.patient
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,8 +11,8 @@ import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.palliativecareapp.R
-import com.example.palliativecareapp.mutualScreens.adapters.GroupMessageAdapter
-import com.example.palliativecareapp.mutualScreens.models.GroupMessage
+import com.example.palliativecareapp.adapters.GroupMessageAdapter
+import com.example.palliativecareapp.models.GroupMessage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*

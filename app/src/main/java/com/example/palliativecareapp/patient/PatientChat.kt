@@ -1,4 +1,4 @@
-package com.example.palliativecareapp.mutualScreens
+package com.example.palliativecareapp.patient
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,23 +8,29 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.palliativecareapp.R
-import com.example.palliativecareapp.mutualScreens.adapters.DoctorAdapter
-import com.example.palliativecareapp.mutualScreens.models.Doctor
+import com.example.palliativecareapp.adapters.DoctorAdapter
+import com.example.palliativecareapp.models.Doctor
+import com.example.palliativecareapp.mutualScreens.ChattingScreen
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_doctor_chat.*
+import kotlinx.android.synthetic.main.activity_patient_chat.*
 
-class DoctorChat : AppCompatActivity() {
+class PatientChat : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_doctor_chat)
+        setContentView(R.layout.activity_patient_chat)
+
+        all_patients.setOnClickListener {
+            val intent = Intent(this@PatientChat, GroupChattingScreen::class.java)
+            startActivity(intent)
+        }
 
         val doctors = ArrayList<Doctor>()
         val myAdapter = DoctorAdapter(doctors, this)
-        RV_patients.layoutManager = LinearLayoutManager(this)
-        RV_patients.adapter = myAdapter
+        RV_doctors.layoutManager = LinearLayoutManager(this)
+        RV_doctors.adapter = myAdapter
 
         val db = FirebaseFirestore.getInstance()
-        db.collection("patients")
+        db.collection("doctors")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -63,8 +69,8 @@ class DoctorChat : AppCompatActivity() {
 
         myAdapter.onItemClickListener(object : DoctorAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                val intent = Intent(this@DoctorChat, ChattingScreen::class.java)
-                intent.putExtra("userId", doctors[position].id)
+                val intent = Intent(this@PatientChat, ChattingScreen::class.java)
+                intent.putExtra("doctorId", doctors[position].id)
                 print(doctors[position].id)
                 startActivity(intent)
             }
