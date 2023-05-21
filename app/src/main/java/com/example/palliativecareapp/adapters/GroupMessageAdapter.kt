@@ -17,20 +17,20 @@ class GroupMessageAdapter(
     private val context: Context,
     private val messages: List<GroupMessage>,
     private val currentUserUid: String
-) : RecyclerView.Adapter<GroupMessageAdapter.MessageViewHolder>() {
+) : RecyclerView.Adapter<GroupMessageAdapter.ViewHolder>() {
 
-    class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val messageText: TextView = itemView.findViewById(R.id.message_text)
         val messageSender: TextView = itemView.findViewById(R.id.message_sender)
         val messageTime: TextView = itemView.findViewById(R.id.message_time)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.group_message_item, parent, false)
-        return MessageViewHolder(view)
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val message = messages[position]
         holder.messageText.text = message.text
         holder.messageSender.text = message.senderName

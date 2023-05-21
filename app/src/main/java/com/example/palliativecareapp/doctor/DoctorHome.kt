@@ -68,7 +68,7 @@ class DoctorHome : AppCompatActivity() {
         lvTopics.layoutManager = LinearLayoutManager(this)
         lvTopics.adapter = myAdapter
 
-        var doctorId = ""
+        var doctorId = "b7iSVSfKFCQlSdT1hpGyf5G3oIm2"
         val db = FirebaseFirestore.getInstance()
         val query = db.collection("topics")
             .whereEqualTo("autherId", doctorId)

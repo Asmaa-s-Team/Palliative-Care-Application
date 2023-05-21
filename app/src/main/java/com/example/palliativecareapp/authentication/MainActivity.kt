@@ -18,7 +18,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-            updateUI()
+        val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+//        editor.putString("doctor", "")
+//        editor.putString("patient", "")
+        editor.apply()
+        updateUI()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

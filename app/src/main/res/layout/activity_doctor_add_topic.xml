@@ -169,7 +169,7 @@
             android:padding="17dp"
             android:background="@drawable/circle"
             android:layout_marginLeft="15dp"
-            app:srcCompat="@drawable/link" />
+            app:srcCompat="@drawable/ic_baseline_bar_chart_24" />
 
         <ImageView
             android:layout_width="70dp"

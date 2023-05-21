@@ -46,9 +46,4 @@ class MessageAdapter(
     override fun getItemCount(): Int {
         return messages.size
     }
-
-    fun Long.dateToString(): String {
-        val dateFormat = DateFormat.getDateTimeInstance()
-        return dateFormat.format(Date(this))
-    }
 }
