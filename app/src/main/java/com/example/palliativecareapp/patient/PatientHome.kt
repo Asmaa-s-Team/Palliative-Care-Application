@@ -85,7 +85,6 @@ class PatientHome : AppCompatActivity() {
     private fun searchFirestore(query: String) {
         val startValue = query
         val endValue = query + "\uf8ff"
-
         val collectionRef = db.collection("topics")
         val queryRef: Query = collectionRef.orderBy("name")
             .whereGreaterThanOrEqualTo("name", startValue)
