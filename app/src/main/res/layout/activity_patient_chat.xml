@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
     <EditText
-        android:id="@+id/search"
+        android:id="@+id/search_text"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:background="@drawable/search_input"

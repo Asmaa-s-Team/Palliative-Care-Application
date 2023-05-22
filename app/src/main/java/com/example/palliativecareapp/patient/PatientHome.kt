@@ -11,20 +11,33 @@ import com.example.palliativecareapp.R
 import com.example.palliativecareapp.adapters.TopicAdapter
 import com.example.palliativecareapp.models.Topic
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_patient_home.*
 
 class PatientHome : AppCompatActivity() {
+    val db = FirebaseFirestore.getInstance()
+    lateinit var myAdapter: TopicAdapter
+    var topics = ArrayList<Topic>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patient_home)
 
-        val topics = ArrayList<Topic>()
-        val myAdapter = TopicAdapter(topics, this)
+        myAdapter = TopicAdapter(topics, this)
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = myAdapter
 
-        val db = FirebaseFirestore.getInstance()
+        close_search.setOnClickListener {
+            search_text.text = null
+            clearSearch()
+        }
+
+        search_btn.setOnClickListener {
+            if (search_text.text != null) {
+                searchFirestore(search_text.text.toString())
+            }
+        }
+
         db.collection("topics").get()
             .addOnSuccessListener { querySnapshot ->
                 for (document in querySnapshot.documents) {
@@ -67,5 +80,26 @@ class PatientHome : AppCompatActivity() {
                 startActivity(intent)
             }
         })
+    }
+
+    private fun searchFirestore(query: String) {
+        val startValue = query
+        val endValue = query + "\uf8ff"
+
+        val collectionRef = db.collection("topics")
+        val queryRef: Query = collectionRef.orderBy("name")
+            .whereGreaterThanOrEqualTo("name", startValue)
+            .whereLessThanOrEqualTo("name", endValue)
+        queryRef.get().addOnSuccessListener { querySnapshot ->
+            querySnapshot.documents.map { document ->
+                document.toObject(Topic::class.java)
+            }
+            myAdapter.filter(query)
+        }
+    }
+    private fun clearSearch() {
+        if (myAdapter.isFiltering()) {
+            myAdapter.filter("") // Pass an empty query to clear the filter
+        }
     }
 }

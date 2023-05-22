@@ -15,4 +15,7 @@ class Topic {
         this.name = name
         this.description = description
     }
+
+    constructor()
+
 }
