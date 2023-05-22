@@ -115,14 +115,14 @@ class PatientTopic : AppCompatActivity() {
         val timestamp = System.currentTimeMillis()
         val sdf = SimpleDateFormat("YYYY-MM-dd HH:mm", Locale.getDefault())
         val formattedDate = sdf.format(Date(timestamp))
-        val user = hashMapOf(
+        val comment = hashMapOf(
             "text" to comment,
             "senderId" to userId,
             "timestamp" to formattedDate,
             "topicId" to topicId
         )
         db.collection("comments")
-            .add(user)
+            .add(comment)
             .addOnSuccessListener { documentReference ->
                 Log.d("add success", "DocumentSnapshot added with ID: ${documentReference.id}")
             }

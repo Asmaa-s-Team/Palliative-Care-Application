@@ -4,147 +4,95 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_vertical"
     android:layoutDirection="rtl"
-    tools:context=".doctor.DoctorAddTopic">
+    android:layout_alignParentRight="true"
+    tools:context=".patient.PatientHome">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="إضافة مقال جديد"
+        android:layout_gravity="center"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
         android:textColor="@color/primary"
-        android:textSize="36dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.067" />
+        android:textSize="26dp"
+        android:textStyle="bold" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="right"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.236"
-        app:shapeAppearanceOverlay="@style/circular"
-        app:srcCompat="@drawable/banner"
-        app:strokeColor="@color/primary"
-        app:strokeWidth="1dp"></com.google.android.material.imageview.ShapeableImageView>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/photo"/>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="شعار المقال"
-        android:textColor="@color/primary"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.156" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="عنوان المقال"
-        android:textColor="@color/primary"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.358" />
 
     <EditText
         android:id="@+id/topic_title"
-        android:layout_width="323dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
         android:ems="10"
+        android:layout_marginVertical="15dp"
+        android:textColorHint="#566E8A"
         android:hint="عنوان المقال"
         android:inputType="textPersonName"
-        android:paddingRight="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.433" />
+        android:paddingRight="15dp" />
 
-    <EditText
-        android:id="@+id/topic_description"
-        android:layout_width="323dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        <EditText
+            android:id="@+id/topic_description"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="15dp"
+            android:ems="10"
+            android:lines="5"
+            android:maxLines="10"
+            android:minLines="1"
+            android:gravity="top"
+            android:hint="تفاصيل المقال"
+            android:inputType="text"
+            android:paddingRight="15dp"
+            android:textColorHint="#566E8A" />
+
+        <EditText
+        android:id="@+id/topic_info"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:gravity="top"
+        android:layout_marginHorizontal="15dp"
         android:ems="10"
-        android:hint="تفاصيل المقال"
-        android:inputType="textPersonName"
+        android:textColorHint="#566E8A"
+        android:hint="معلومات المقال"
+        android:inputType="text"
         android:lines="8"
         android:maxLines="10"
         android:minLines="1"
-        android:paddingRight="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.606" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="تفاصيل المقال"
-        android:textColor="@color/primary"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.525" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ملفات المقال"
-        android:textColor="@color/primary"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.674" />
+        android:paddingRight="15dp" />
 
     <LinearLayout
         android:id="@+id/layout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginVertical="15dp"
         android:gravity="center_horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.77"
         android:orientation="horizontal">
 
         <ImageView
@@ -181,16 +129,17 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/send_notification_btn"
+        android:id="@+id/add_topic"
         android:layout_width="204dp"
         android:layout_height="56dp"
         android:background="@drawable/btn_design"
         android:text="إضافة"
         android:textColor="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.918" />
+        android:layout_marginVertical="20dp"
+        android:textSize="20dp" />
+
+    </LinearLayout>
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
