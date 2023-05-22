@@ -16,10 +16,12 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.chat_search_item.view.*
 import kotlinx.android.synthetic.main.topic_item.view.*
 
-class TopicAdapter (private val list: ArrayList<Topic>, var context: Context) :
+class TopicAdapter (private val list: List<Topic>, var context: Context) :
     RecyclerView.Adapter<TopicAdapter.ViewHolder>() {
 
+    private var filteredItems: List<Topic> = list
     private lateinit var mlistener: OnItemClickListener
+    private var isFiltering: Boolean = false
 
     fun onItemClickListener(listener: OnItemClickListener) {
         mlistener = listener
@@ -43,7 +45,7 @@ class TopicAdapter (private val list: ArrayList<Topic>, var context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val current = list[position]
+        val current = filteredItems[position]
         var name = current.name
         var description = current.description
         holder.name.text = name
@@ -61,7 +63,24 @@ class TopicAdapter (private val list: ArrayList<Topic>, var context: Context) :
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return filteredItems.size
+    }
+
+    fun filter(query: String) {
+        filteredItems = if (query.isEmpty()) {
+            isFiltering = false
+            list
+        } else {
+            isFiltering = true
+            list.filter { item ->
+                item.name.contains(query, ignoreCase = true)
+            }
+        }
+        notifyDataSetChanged()
+    }
+
+    fun isFiltering(): Boolean {
+        return isFiltering
     }
 
     interface OnItemClickListener {
