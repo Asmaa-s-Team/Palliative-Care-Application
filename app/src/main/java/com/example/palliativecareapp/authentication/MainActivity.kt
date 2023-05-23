@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.putString("doctor", "")
-        editor.putString("patient", "")
+//        editor.putString("doctor", "")
+//        editor.putString("patient", "")
         editor.apply()
         updateUI()
     }
@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         doctor_btn.setOnClickListener {
-            val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
             editor.putString("doctor", "doctor")
             editor.apply()

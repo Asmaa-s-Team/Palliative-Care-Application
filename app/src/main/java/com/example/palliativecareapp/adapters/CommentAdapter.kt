@@ -41,12 +41,9 @@ class CommentAdapter(
         db.collection("patients").document(comment.senderId!!).get()
             .addOnSuccessListener { result ->
                 if (result != null) {
-                    var hash = result.get("name") as HashMap<String, String>
+                    var name = result.getString("name")
                     var senderImage = result.getString("image").toString()
-                    var first = hash.get("first").toString()
-                    var middle = hash.get("middle").toString()
-                    var last = hash.get("last").toString()
-                    holder.senderName.text = "$first $middle $last"
+                    holder.senderName.text = name
                     val storageRef = storageImage.child(senderImage.toString())
                     storageRef.downloadUrl.addOnSuccessListener { uri ->
                         val imageUrl = uri.toString()
@@ -54,7 +51,6 @@ class CommentAdapter(
                     }
                 }
             }
-
 
     }
 

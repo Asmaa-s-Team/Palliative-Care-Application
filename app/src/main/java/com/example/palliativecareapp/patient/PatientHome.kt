@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.palliativecareapp.R
-import com.example.palliativecareapp.adapters.TopicAdapter
+import com.example.palliativecareapp.adapters.PatientTopicAdapter
 import com.example.palliativecareapp.models.Topic
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.patient_home.*
 
 class PatientHome : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance()
-    lateinit var myAdapter: TopicAdapter
+    lateinit var myAdapter: PatientTopicAdapter
     var myTopics = ArrayList<Topic>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +40,7 @@ class PatientHome : AppCompatActivity() {
             startActivity(intent)
         }
 
-        myAdapter = TopicAdapter(myTopics, this)
+        myAdapter = PatientTopicAdapter(myTopics, this)
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = myAdapter
 
@@ -55,7 +55,7 @@ class PatientHome : AppCompatActivity() {
             }
         }
 
-        db.collection("topics").get()
+        db.collection("topics").whereEqualTo("hidden", false).get()
             .addOnSuccessListener { querySnapshot ->
                 for (document in querySnapshot.documents) {
                     myTopics.add(
@@ -90,7 +90,7 @@ class PatientHome : AppCompatActivity() {
             progressBar.visibility = View.GONE
         }
 
-        myAdapter.onItemClickListener(object : TopicAdapter.OnItemClickListener {
+        myAdapter.onItemClickListener(object : PatientTopicAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val intent = Intent(this@PatientHome, PatientTopic::class.java)
                 intent.putExtra("topicId", myTopics[position].id)

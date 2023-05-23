@@ -12,8 +12,8 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_topic.view.*
 
 
-class TopicAdapter (private val list: List<Topic>, var context: Context) :
-    RecyclerView.Adapter<TopicAdapter.ViewHolder>() {
+class DoctorTopicAdapter (private val list: List<Topic>, var context: Context) :
+    RecyclerView.Adapter<DoctorTopicAdapter.ViewHolder>() {
 
     private var filteredItems: List<Topic> = list
     private lateinit var mlistener: OnItemClickListener

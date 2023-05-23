@@ -28,6 +28,7 @@ class PatientTopic : AppCompatActivity() {
     lateinit var description : String
     lateinit var information : String
     lateinit var logo : String
+    lateinit var autherId : String
     lateinit var userId : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +48,7 @@ class PatientTopic : AppCompatActivity() {
                     description = result.getString("description").toString()
                     information = result.getString("information").toString()
                     logo = result.getString("logo").toString()
+                    autherId = result.getString("autherId").toString()
                     topic_name.text = name
                     topic_info.text = information
                     val storageImage = FirebaseStorage.getInstance().reference
@@ -55,6 +57,13 @@ class PatientTopic : AppCompatActivity() {
                         val imageUrl = uri.toString()
                         Picasso.with(this).load(imageUrl).into(topic_image)
                     }
+                    db.collection("doctors").document(autherId).get()
+                        .addOnSuccessListener { result ->
+                            if (result != null) {
+                                var name = result.getString("name").toString()
+                                doctor_name.text = "د. $name"
+                            }
+                        }
                     getComments()
                 }
                 Log.e("success", "${result.id} => ${result.data}")

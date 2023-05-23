@@ -39,12 +39,9 @@ class LoginPatient : AppCompatActivity() {
                     signInWithEmailAndPassword(email.toString(),password.toString())
                 var i = Intent(this, PatientHome::class.java)
                 startActivity(i)
-                    Toast.makeText(baseContext, "LogIn Success.",
-                        Toast.LENGTH_SHORT).show()
                 }
                 else{
-                    Toast.makeText(baseContext, "LogIn Failed. Please enter the EMPTY Fields .",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, "LogIn Failed. Please enter the EMPTY Fields .", Toast.LENGTH_SHORT).show()
                 }
         }
         signLogin.setOnClickListener {
@@ -56,16 +53,13 @@ class LoginPatient : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     Log.d("User:signInWithEmail", "signInWithEmail:success")
                     Toast.makeText(baseContext, "Authentication success.",
                         Toast.LENGTH_SHORT).show()
-                    val user = auth.currentUser
                     val editor = sharedPreferences.edit()
                     editor.putString("patient", "login")
                     editor.apply()
                 } else {
-                    // If sign in fails, display a message to the user.
                     Log.w("User:signInWithEmail", "signInWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()

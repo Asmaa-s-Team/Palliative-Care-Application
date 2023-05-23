@@ -11,7 +11,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.palliativecareapp.R
-import com.example.palliativecareapp.adapters.TopicAdapter
+import com.example.palliativecareapp.adapters.DoctorTopicAdapter
+import com.example.palliativecareapp.adapters.PatientTopicAdapter
 import com.example.palliativecareapp.models.Topic
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -31,7 +32,7 @@ class DoctorHome : AppCompatActivity() {
     var name = ""
     lateinit var db : FirebaseFirestore
     val myTopics = ArrayList<Topic>()
-    var myAdapter = TopicAdapter(myTopics, this)
+    var myAdapter = DoctorTopicAdapter(myTopics, this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,12 +75,8 @@ class DoctorHome : AppCompatActivity() {
         editor.putString("name", name)
         editor.apply()
 
-//        add_topic.setOnClickListener {
-//            val i = Intent(this, DoctorAddTopic::class.java)
-//            startActivity(i)
-//        }
 
-        myAdapter = TopicAdapter(myTopics, this)
+        myAdapter = DoctorTopicAdapter(myTopics, this)
         RV_topics.layoutManager = LinearLayoutManager(this)
         RV_topics.adapter = myAdapter
 
@@ -122,7 +119,7 @@ class DoctorHome : AppCompatActivity() {
             progressBar.visibility = View.GONE
         }
 
-        myAdapter.onItemClickListener(object : TopicAdapter.OnItemClickListener {
+        myAdapter.onItemClickListener(object : DoctorTopicAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val intent = Intent(this@DoctorHome, DoctorTopic::class.java)
                 intent.putExtra("topicId", myTopics[position].id)
@@ -130,7 +127,7 @@ class DoctorHome : AppCompatActivity() {
                 startActivity(intent)
             }
         })
-        myAdapter.onItemLongClickListener(object : TopicAdapter.OnItemLongClickListener {
+        myAdapter.onItemLongClickListener(object : DoctorTopicAdapter.OnItemLongClickListener {
             override fun onItemLongClick(position: Int) {
                 val topic = myTopics[position]
                 val dialogBuilder = AlertDialog.Builder(this@DoctorHome)
