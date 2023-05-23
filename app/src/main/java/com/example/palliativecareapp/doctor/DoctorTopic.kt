@@ -9,11 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.palliativecareapp.R
 import com.example.palliativecareapp.adapters.CommentAdapter
 import com.example.palliativecareapp.models.Comment
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_doctor_topic.*
+import kotlinx.android.synthetic.main.doctor_topic.*
 
 class DoctorTopic : AppCompatActivity() {
     // ToDo: المرفقات
@@ -25,7 +24,7 @@ class DoctorTopic : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_doctor_topic)
+        setContentView(R.layout.doctor_topic)
 
          topicId = intent.getStringExtra("topicId")!!
 
@@ -39,6 +38,7 @@ class DoctorTopic : AppCompatActivity() {
                      logo = result.getString("logo").toString()
                     topic_name.text = name
                     topic_information.text = information
+                    topic_description.text = description
                     val storageImage = FirebaseStorage.getInstance().reference
                     val storageRef = storageImage.child(logo!!)
                     storageRef.downloadUrl.addOnSuccessListener { uri ->

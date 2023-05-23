@@ -1,29 +1,20 @@
 package com.example.palliativecareapp.mutualScreens
 
-import android.content.Context
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.palliativecareapp.R
 import com.example.palliativecareapp.adapters.MessageAdapter
 import com.example.palliativecareapp.models.Message
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import kotlinx.android.synthetic.main.activity_chatting_screen.*
+import kotlinx.android.synthetic.main.chatting_screen.*
 import com.google.firebase.database.*
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_doctor_home.*
-import kotlinx.coroutines.tasks.await
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
@@ -38,7 +29,7 @@ class ChattingScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_chatting_screen)
+        setContentView(R.layout.chatting_screen)
 
         auth = Firebase.auth
         var user = auth.currentUser

@@ -12,12 +12,12 @@ import com.example.palliativecareapp.adapters.DoctorAdapter
 import com.example.palliativecareapp.models.Doctor
 import com.example.palliativecareapp.mutualScreens.ChattingScreen
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_patient_chat.*
+import kotlinx.android.synthetic.main.patient_chat.*
 
 class PatientChat : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_patient_chat)
+        setContentView(R.layout.patient_chat)
 
         all_patients.setOnClickListener {
             val intent = Intent(this@PatientChat, GroupChattingScreen::class.java)

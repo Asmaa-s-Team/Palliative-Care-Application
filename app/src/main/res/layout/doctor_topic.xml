@@ -28,8 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="الصحة التلطيفية للقلب"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:textColor="@color/primary"
                 android:textSize="26dp"
                 android:textStyle="bold"/>
@@ -42,6 +41,18 @@
                 android:src="@drawable/background"/>
 
             <TextView
+                android:id="@+id/topic_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="15dp"
+                android:ems="10"
+                android:padding="10dp"
+                android:text="تفاصيل المقال..."
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="normal" />
+            <TextView
                 android:id="@+id/topic_information"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,7 +60,7 @@
                 android:layout_marginTop="15dp"
                 android:ems="10"
                 android:padding="10dp"
-                android:text="التفاصيل..."
+                android:text="معلومات المقال..."
                 android:textColor="@color/black"
                 android:textSize="16dp"
                 android:textStyle="normal" />
@@ -121,13 +132,13 @@
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="right"/>
 
-           <androidx.recyclerview.widget.RecyclerView
-               android:id="@+id/lvComments"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_marginHorizontal="5dp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lvComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp">
 
-           </androidx.recyclerview.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
     </ScrollView>

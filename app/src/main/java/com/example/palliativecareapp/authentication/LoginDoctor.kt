@@ -9,12 +9,11 @@ import android.util.Log
 import android.widget.Toast
 import com.example.palliativecareapp.R
 import com.example.palliativecareapp.doctor.DoctorHome
-import com.example.palliativecareapp.patient.PatientHome
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_login_doctor.*
+import kotlinx.android.synthetic.main.doctor_login.*
 
 class LoginDoctor : AppCompatActivity() {
     lateinit var sharedPreferences : SharedPreferences
@@ -28,7 +27,7 @@ class LoginDoctor : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login_doctor)
+        setContentView(R.layout.doctor_login)
 
         sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         auth = Firebase.auth

@@ -35,7 +35,7 @@ class GroupChattingScreen : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_group_chatting_screen)
+            setContentView(R.layout.patient_group_chatting)
             sharedPreferences = this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
             auth = Firebase.auth
             var user = auth.currentUser

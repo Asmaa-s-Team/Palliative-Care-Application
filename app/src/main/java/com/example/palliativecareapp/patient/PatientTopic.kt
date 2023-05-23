@@ -15,7 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_patient_topic.*
+import kotlinx.android.synthetic.main.patient_topic.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -32,7 +32,7 @@ class PatientTopic : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_patient_topic)
+        setContentView(R.layout.patient_topic)
 
         auth = Firebase.auth
         var user = auth.currentUser

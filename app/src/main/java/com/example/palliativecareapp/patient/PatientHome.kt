@@ -10,18 +10,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.palliativecareapp.R
 import com.example.palliativecareapp.adapters.TopicAdapter
 import com.example.palliativecareapp.models.Topic
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import kotlinx.android.synthetic.main.activity_patient_home.*
+import kotlinx.android.synthetic.main.patient_home.*
 
 class PatientHome : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance()
     lateinit var myAdapter: TopicAdapter
     var topics = ArrayList<Topic>()
+    lateinit var bottomNav : BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_patient_home)
+        setContentView(R.layout.patient_home)
 
         myAdapter = TopicAdapter(topics, this)
         recycler.layoutManager = LinearLayoutManager(this)

@@ -10,8 +10,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.palliativecareapp.R
 import com.example.palliativecareapp.models.Message
-import java.text.DateFormat
-import java.util.*
 
 class MessageAdapter(
     private val context: Context,
@@ -25,7 +23,7 @@ class MessageAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.message_item, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_message, parent, false)
         return MessageViewHolder(view)
     }
 

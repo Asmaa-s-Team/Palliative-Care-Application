@@ -12,12 +12,12 @@ import com.example.palliativecareapp.adapters.DoctorAdapter
 import com.example.palliativecareapp.models.Doctor
 import com.example.palliativecareapp.mutualScreens.ChattingScreen
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_doctor_chat.*
+import kotlinx.android.synthetic.main.doctor_chat.*
 
 class DoctorChat : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_doctor_chat)
+        setContentView(R.layout.doctor_chat)
 
         val doctors = ArrayList<Doctor>()
         val myAdapter = DoctorAdapter(doctors, this)

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layoutDirection="rtl"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/chat"
+            android:textColor="@color/primary"
+            android:textSize="26sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:id="@+id/layoutt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginHorizontal="15dp"
+            android:background="@drawable/search_btn">
+
+            <Button
+                android:id="@+id/close_search"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/ic_baseline_close_24"/>
+
+            <EditText
+                android:id="@+id/search_text"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="10dp"
+                android:inputType="text"
+                android:hint="بحث"
+                android:textSize="18sp"
+                android:background="@drawable/search_input"
+                android:textColorHint="@color/primary"/>
+
+            <Button
+                android:id="@+id/search_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/search"/>
+        </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:outlineSpotShadowColor="@color/primary"
+                android:layout_marginHorizontal="15dp">
+                <LinearLayout
+                    android:id="@+id/all_patients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_margin="5dp">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_baseline_groups_24"
+                        android:paddingHorizontal="5dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:textSize="20dp"
+                        android:textColor="@color/primary"
+                        android:text="كل الأعضاء"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginHorizontal="10dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_gravity="right"
+                android:textColor="@color/primary"
+                android:text="الأطباء"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RV_doctors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="10dp">
+            </androidx.recyclerview.widget.RecyclerView>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@android:style/Widget.ProgressBar.Large"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:visibility="gone"
+            android:layout_centerInParent="true" />
+        </LinearLayout>

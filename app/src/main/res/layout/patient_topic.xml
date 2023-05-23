@@ -29,10 +29,9 @@
                 android:layout_height="wrap_content"
                 android:text="الصحة التلطيفية للقلب"
                 android:layout_gravity="center"
-                android:layout_marginRight="20dp"
                 android:layout_marginTop="15dp"
                 android:textColor="@color/primary"
-                android:textSize="26dp"
+                android:textSize="26sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -40,6 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="د. محمد الشرفا"
+                android:layout_marginTop="5dp"
                     android:textColor="@color/primary"
                     android:textSize="18dp" />
 

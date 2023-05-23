@@ -17,7 +17,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_doctor_home.*
+import kotlinx.android.synthetic.main.doctor_home.*
 
 class DoctorHome : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -29,7 +29,7 @@ class DoctorHome : AppCompatActivity() {
     lateinit var db : FirebaseFirestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_doctor_home)
+        setContentView(R.layout.doctor_home)
         sharedPreferences = this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
         auth = Firebase.auth
         var user = auth.currentUser
@@ -58,15 +58,15 @@ class DoctorHome : AppCompatActivity() {
         editor.putString("last", last)
         editor.apply()
 
-        add_topic.setOnClickListener {
-            val i = Intent(this, DoctorAddTopic::class.java)
-            startActivity(i)
-        }
+//        add_topic.setOnClickListener {
+//            val i = Intent(this, DoctorAddTopic::class.java)
+//            startActivity(i)
+//        }
 
         val topics = ArrayList<Topic>()
         val myAdapter = TopicAdapter(topics, this)
-        lvTopics.layoutManager = LinearLayoutManager(this)
-        lvTopics.adapter = myAdapter
+        RV_topics.layoutManager = LinearLayoutManager(this)
+        RV_topics.adapter = myAdapter
 
         var doctorId = "b7iSVSfKFCQlSdT1hpGyf5G3oIm2"
         val db = FirebaseFirestore.getInstance()

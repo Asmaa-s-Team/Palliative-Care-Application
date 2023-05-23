@@ -7,6 +7,6 @@ import com.example.palliativecareapp.R
 class DoctorEditTopic : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_doctor_edit_topic)
+        setContentView(R.layout.doctor_edit_topic)
     }
 }

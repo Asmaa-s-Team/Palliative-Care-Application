@@ -10,7 +10,7 @@ import com.example.palliativecareapp.models.Comment
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.comment_item.view.*
+import kotlinx.android.synthetic.main.item_comment.view.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -27,7 +27,7 @@ class CommentAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.comment_item, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_comment, parent, false)
         return ViewHolder(view)
     }
 

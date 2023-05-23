@@ -7,6 +7,6 @@ import com.example.palliativecareapp.R
 class PatientNotifications : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_patient_notifications)
+        setContentView(R.layout.patient_notifications)
     }
 }

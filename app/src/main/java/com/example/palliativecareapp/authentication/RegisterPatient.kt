@@ -13,14 +13,13 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.palliativecareapp.R
-import com.example.palliativecareapp.doctor.DoctorHome
 import com.example.palliativecareapp.patient.PatientHome
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_register_patient.*
+import kotlinx.android.synthetic.main.patient_register.*
 import java.util.*
 
 
@@ -39,7 +38,7 @@ class RegisterPatient : AppCompatActivity() {
     private var dateButton: Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register_patient)
+        setContentView(R.layout.patient_register)
         sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         initDatePicker();
         dateButton = findViewById(R.id.datePickerBtn);

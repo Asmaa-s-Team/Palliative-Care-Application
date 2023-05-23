@@ -1,18 +1,15 @@
 package com.example.palliativecareapp.adapters
 
 import android.content.Context
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.module.AppGlideModule
 import com.example.palliativecareapp.R
 import com.example.palliativecareapp.models.Doctor
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.chat_search_item.view.*
+import kotlinx.android.synthetic.main.item_chat_search.view.*
 
 class DoctorAdapter (private val list: ArrayList<Doctor>, var context: Context) :
     RecyclerView.Adapter<DoctorAdapter.ViewHolder>() {
@@ -35,7 +32,7 @@ class DoctorAdapter (private val list: ArrayList<Doctor>, var context: Context) 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.chat_search_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_chat_search, parent, false)
         return ViewHolder(itemView, mlistener)
     }
 

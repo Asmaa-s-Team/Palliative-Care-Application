@@ -6,10 +6,8 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.webkit.MimeTypeMap
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import java.io.IOException
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,7 +15,7 @@ import com.example.palliativecareapp.R
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_doctor_add_topic.*
+import kotlinx.android.synthetic.main.doctor_add_topic.*
 import java.util.*
 
 class DoctorAddTopic : AppCompatActivity() {
@@ -31,7 +29,7 @@ class DoctorAddTopic : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_doctor_add_topic)
+        setContentView(R.layout.doctor_add_topic)
 
         imageView.setOnClickListener{
             val i = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -100,7 +98,6 @@ class DoctorAddTopic : AppCompatActivity() {
 
     // Function to upload the selected image to Firebase Storage
     private fun uploadImageToFirebase() {
-
         val randomNumber = UUID.randomUUID().toString()
         val storageRef = FirebaseStorage.getInstance().getReference("images")
         val imgRef = storageRef.child("image " + randomNumber)

@@ -7,6 +7,6 @@ import com.example.palliativecareapp.R
 class PatientTopics : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_patient_topics)
+        setContentView(R.layout.patient_topics)
     }
 }

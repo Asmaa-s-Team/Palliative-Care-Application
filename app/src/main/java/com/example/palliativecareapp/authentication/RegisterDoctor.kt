@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_register_doctor.*
+import kotlinx.android.synthetic.main.doctor_register.*
 import java.util.*
 
 
@@ -39,7 +39,7 @@ class RegisterDoctor : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register_doctor)
+        setContentView(R.layout.doctor_register)
 
         sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
         initDatePicker();
