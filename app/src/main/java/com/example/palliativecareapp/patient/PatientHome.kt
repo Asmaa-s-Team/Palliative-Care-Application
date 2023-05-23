@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.palliativecareapp.R
 import com.example.palliativecareapp.adapters.TopicAdapter
 import com.example.palliativecareapp.models.Topic
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.patient_home.*
@@ -18,14 +17,30 @@ import kotlinx.android.synthetic.main.patient_home.*
 class PatientHome : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance()
     lateinit var myAdapter: TopicAdapter
-    var topics = ArrayList<Topic>()
-    lateinit var bottomNav : BottomNavigationView
+    var myTopics = ArrayList<Topic>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.patient_home)
 
-        myAdapter = TopicAdapter(topics, this)
+        chat.setOnClickListener {
+            val intent = Intent(this@PatientHome, PatientChat::class.java)
+            startActivity(intent)
+        }
+        notifications.setOnClickListener {
+            val intent = Intent(this@PatientHome, PatientNotifications::class.java)
+            startActivity(intent)
+        }
+        topics.setOnClickListener {
+            val intent = Intent(this@PatientHome, PatientTopics::class.java)
+            startActivity(intent)
+        }
+        profile.setOnClickListener {
+            val intent = Intent(this@PatientHome, PatientProfile::class.java)
+            startActivity(intent)
+        }
+
+        myAdapter = TopicAdapter(myTopics, this)
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = myAdapter
 
@@ -43,18 +58,19 @@ class PatientHome : AppCompatActivity() {
         db.collection("topics").get()
             .addOnSuccessListener { querySnapshot ->
                 for (document in querySnapshot.documents) {
-                    topics.add(
+                    myTopics.add(
                         Topic(
                             document.id,
                             document.getString("logo").toString(),
                             document.getString("name").toString(),
                             document.getString("description").toString(),
+                            document.getBoolean("hidden")!!,
                         )
                     )
                     Log.e("success", "${document.id} => ${document.data}")
                 }
                 myAdapter.notifyDataSetChanged()
-                if (topics.isEmpty()) {
+                if (myTopics.isEmpty()) {
                     progressBar.isIndeterminate = true
                     progressBar.visibility = View.VISIBLE
                 } else {
@@ -66,7 +82,7 @@ class PatientHome : AppCompatActivity() {
                 Log.e("error", "Error getting topics", exception)
                 Toast.makeText(this, "There is an error getting topics", Toast.LENGTH_SHORT)
             }
-        if (topics.isEmpty()) {
+        if (myTopics.isEmpty()) {
             progressBar.isIndeterminate = true
             progressBar.visibility = View.VISIBLE
         } else {
@@ -77,8 +93,8 @@ class PatientHome : AppCompatActivity() {
         myAdapter.onItemClickListener(object : TopicAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val intent = Intent(this@PatientHome, PatientTopic::class.java)
-                intent.putExtra("topicId", topics[position].id)
-                print(topics[position].id)
+                intent.putExtra("topicId", myTopics[position].id)
+                print(myTopics[position].id)
                 startActivity(intent)
             }
         })

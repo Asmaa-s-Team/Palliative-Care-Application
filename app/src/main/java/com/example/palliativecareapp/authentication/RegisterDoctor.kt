@@ -92,13 +92,12 @@ class RegisterDoctor : AppCompatActivity() {
                     val db = Firebase.firestore
                     val userRef = db.collection("doctors").document(user!!.uid)
 
-                    val fullName = hashMapOf(
-                        "first" to first.text.toString(),
-                        "middle" to middle.text.toString(),
-                        "last" to last.text.toString()
-                    )
+                    var first = first.text.toString()
+                    var middle = middle.text.toString()
+                    var last = last.text.toString()
+
                     val userInfo = hashMapOf(
-                        "name" to fullName,
+                        "name" to "$first $middle $last",
                         "address" to address.text.toString(),
                         "phone" to phone.text.toString(),
                         "birth" to date,

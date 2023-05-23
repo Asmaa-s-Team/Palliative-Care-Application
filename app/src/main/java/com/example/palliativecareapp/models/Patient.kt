@@ -1,6 +1,6 @@
 package com.example.palliativecareapp.models
 
-class Doctor {
+class Patient {
     var id: String = ""
     var name: String = ""
     var image: String = ""

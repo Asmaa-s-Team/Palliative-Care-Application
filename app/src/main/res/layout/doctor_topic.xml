@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="الصحة التلطيفية للقلب"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:textColor="@color/primary"
                 android:textSize="26dp"
                 android:textStyle="bold"/>

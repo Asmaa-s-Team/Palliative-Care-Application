@@ -16,11 +16,14 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.doctor_add_topic.*
+import kotlinx.android.synthetic.main.doctor_add_topic.imageView
+import kotlinx.android.synthetic.main.doctor_add_topic.topic_description
+import kotlinx.android.synthetic.main.doctor_add_topic.topic_info
+import kotlinx.android.synthetic.main.doctor_add_topic.topic_title
+import kotlinx.android.synthetic.main.doctor_edit_topic.*
 import java.util.*
 
 class DoctorAddTopic : AppCompatActivity() {
-    private val PICK_IMAGE_REQUEST = 123
-    private var filePath: Uri? = null
     private lateinit var auth: FirebaseAuth
     lateinit var db : FirebaseFirestore
     lateinit var userId : String
@@ -59,7 +62,8 @@ class DoctorAddTopic : AppCompatActivity() {
             "name" to title,
             "autherId" to userId,
             "description" to description,
-            "information" to information
+            "information" to information,
+            "hidden" to false,
         )
         db.collection("topics")
             .add(topic)
@@ -73,40 +77,28 @@ class DoctorAddTopic : AppCompatActivity() {
             }
     }
 
-    // Function to open the image picker
-    private fun openImageChooser() {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST)
-    }
-
     // Function to handle the result of image selection
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
-            filePath = data.data
-            try {
-                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
-                // Display the selected image if needed
-                imageView.setImageBitmap(bitmap)
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
+        if (resultCode == RESULT_OK && requestCode == 100){
+            img = data!!.data!!
+            imageView.setImageURI(img)
         }
     }
 
     // Function to upload the selected image to Firebase Storage
     private fun uploadImageToFirebase() {
         val randomNumber = UUID.randomUUID().toString()
-        val storageRef = FirebaseStorage.getInstance().getReference("images")
-        val imgRef = storageRef.child("image " + randomNumber)
+        val extension = getFileExtension(img!!)
+        val storageRef = FirebaseStorage.getInstance().getReference("topic_images")
+        val imgRef = storageRef.child(randomNumber + "." + extension)
         imgRef.putFile(img!!)
-            .addOnSuccessListener {
-                Log.d("TAG", "SUCCESS : ")
+            .addOnSuccessListener { taskSnapshot ->
+                saveImageInFirestore(taskSnapshot.metadata?.name!!)
+                Log.d("TAG", "SUCCESS : image uploaded")
             }
             .addOnFailureListener {
-                Log.d("TAG", "FAILED : ")
+                Log.d("TAG", "FAILED : failed uploading image")
             }
     }
     // Function to get the file extension of the selected image
@@ -117,17 +109,20 @@ class DoctorAddTopic : AppCompatActivity() {
     }
 
     // Function to save the image URL in Firebase Database (optional, based on your requirements)
-    private fun saveImageUrlToDatabase(imageUrl: String, topicId:String) {
-        var documentReference = db.collection("topics").document(topicId!!)
-        val data = hashMapOf(
-            "logo" to imageUrl,
+    fun saveImageInFirestore(imageName:String) {
+        var map = hashMapOf(
+            "logo" to imageName,
         )
-        documentReference.update(data as Map<String, Any>)
+        db.collection("topics").document(topicId).update(map as Map<String, Any>)
             .addOnSuccessListener {
-                // Field added successfully
+                Log.e("save image ", "image saved successfully")
+//                    Toast.makeText(this, "Edited Successfully", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, DoctorHome::class.java)
+                startActivity(intent)
             }
             .addOnFailureListener { e ->
-                // Handle any errors
+                Log.e("save image", "failed save image")
+                // Handle the error and display an error message if necessary
             }
     }
 }

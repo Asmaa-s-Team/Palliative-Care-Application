@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.palliativecareapp.R
 import com.example.palliativecareapp.adapters.TopicAdapter
@@ -18,18 +19,41 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.doctor_home.*
+import kotlinx.android.synthetic.main.doctor_home.chat
+import kotlinx.android.synthetic.main.doctor_home.notifications
+import kotlinx.android.synthetic.main.doctor_home.profile
+import kotlinx.android.synthetic.main.doctor_home.progressBar
+import kotlinx.android.synthetic.main.doctor_home.topics
 
 class DoctorHome : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     lateinit var sharedPreferences : SharedPreferences
-    var first = ""
-    var middle = ""
-    var last =""
-
+    var name = ""
     lateinit var db : FirebaseFirestore
+    val myTopics = ArrayList<Topic>()
+    var myAdapter = TopicAdapter(myTopics, this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.doctor_home)
+
+        chat.setOnClickListener {
+            val intent = Intent(this@DoctorHome, DoctorChat::class.java)
+            startActivity(intent)
+        }
+        notifications.setOnClickListener {
+            val intent = Intent(this@DoctorHome, DoctorNotifications::class.java)
+            startActivity(intent)
+        }
+        topics.setOnClickListener {
+            val intent = Intent(this@DoctorHome, DoctorTopics::class.java)
+            startActivity(intent)
+        }
+        profile.setOnClickListener {
+            val intent = Intent(this@DoctorHome, DoctorProfile::class.java)
+            startActivity(intent)
+        }
+
         sharedPreferences = this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
         auth = Firebase.auth
         var user = auth.currentUser
@@ -39,23 +63,15 @@ class DoctorHome : AppCompatActivity() {
         db.collection("doctors").document(id!!).get().addOnSuccessListener { result ->
             if (result != null ) {
                 var data = result.data!!
-                var hash = data.get("name") as? HashMap<String, Any>
-                first = hash?.get("first").toString()
-                middle = hash?.get("middle").toString()
-                last = hash?.get("last").toString()
-                Log.e("first ", first)
-                Log.e("last ", last)
-                Log.e("middle ", middle)
-                doctor_name.text = "د. $first $middle $last"
+                name = data.get("name") as String
+                doctor_name.text = "د. $name"
             }
         }.addOnFailureListener {
             Log.e("user info", "Fail")
         }
 
         val editor = sharedPreferences.edit()
-        editor.putString("first", first)
-        editor.putString("middle", middle)
-        editor.putString("last", last)
+        editor.putString("name", name)
         editor.apply()
 
 //        add_topic.setOnClickListener {
@@ -63,8 +79,7 @@ class DoctorHome : AppCompatActivity() {
 //            startActivity(i)
 //        }
 
-        val topics = ArrayList<Topic>()
-        val myAdapter = TopicAdapter(topics, this)
+        myAdapter = TopicAdapter(myTopics, this)
         RV_topics.layoutManager = LinearLayoutManager(this)
         RV_topics.adapter = myAdapter
 
@@ -75,18 +90,19 @@ class DoctorHome : AppCompatActivity() {
         query.get()
             .addOnSuccessListener { querySnapshot ->
                 for (document in querySnapshot.documents) {
-                    topics.add(
+                    myTopics.add(
                         Topic(
                             document.id,
                             document.getString("logo").toString(),
                             document.getString("name").toString(),
                             document.getString("description").toString(),
+                            document.getBoolean("hidden")!!,
                         )
                     )
                     Log.e("success", "${document.id} => ${document.data}")
                 }
                 myAdapter.notifyDataSetChanged()
-                if (topics.isEmpty()) {
+                if (myTopics.isEmpty()) {
                     progressBar.isIndeterminate = true
                     progressBar.visibility = View.VISIBLE
                 } else {
@@ -98,7 +114,7 @@ class DoctorHome : AppCompatActivity() {
                 Log.e("error", "Error getting topics", exception)
                 Toast.makeText(this, "There is an error getting topics", Toast.LENGTH_SHORT)
             }
-        if (topics.isEmpty()) {
+        if (myTopics.isEmpty()) {
             progressBar.isIndeterminate = true
             progressBar.visibility = View.VISIBLE
         } else {
@@ -109,10 +125,109 @@ class DoctorHome : AppCompatActivity() {
         myAdapter.onItemClickListener(object : TopicAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val intent = Intent(this@DoctorHome, DoctorTopic::class.java)
-                intent.putExtra("topicId", topics[position].id)
-                print(topics[position].id)
+                intent.putExtra("topicId", myTopics[position].id)
+                print(myTopics[position].id)
                 startActivity(intent)
             }
         })
+        myAdapter.onItemLongClickListener(object : TopicAdapter.OnItemLongClickListener {
+            override fun onItemLongClick(position: Int) {
+                val topic = myTopics[position]
+                val dialogBuilder = AlertDialog.Builder(this@DoctorHome)
+                    .setTitle("Options")
+
+                if (topic.hidden) {
+                    dialogBuilder.setItems(arrayOf("Edit", "Delete", "Unhide")) { _, which ->
+                        when (which) {
+                            0 -> editTopic(topic)
+                            1 -> deleteTopic(topic)
+                            3 -> unhideTopic(topic)
+                        }
+                    }
+                } else {
+                    dialogBuilder.setItems(arrayOf("Edit", "Delete", "Hide")) { _, which ->
+                        when (which) {
+                            0 -> editTopic(topic)
+                            1 -> deleteTopic(topic)
+                            2 -> hideTopic(topic)
+                        }
+                    }
+                }
+
+                val dialog = dialogBuilder.create()
+                dialog.show()
+            }
+            })
     }
+    private fun deleteTopic(topic: Topic) {
+        val topicsCollection = db.collection("topics")
+        val topicId = topic.id
+        topicsCollection.document(topicId).delete()
+            .addOnSuccessListener {
+                Log.e("delete topic", "deleted successfully")
+                for (i in myTopics) {
+                    if (i.id == topicId) {
+                        myTopics.remove(i)
+                        break
+                    }
+                }
+                myAdapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener { e ->
+                Log.e("delete topic", "delete failed")
+            }
+    }
+
+    private fun editTopic(topic: Topic){
+       val intent = Intent(this@DoctorHome, DoctorEditTopic::class.java)
+        intent.putExtra("topicId", topic.id)
+        startActivity(intent)
+    }
+    private fun hideTopic(topic: Topic) {
+        val topicsCollection = db.collection("topics")
+        val topicId = topic.id
+        val updateData = hashMapOf(
+            "hidden" to true
+        )
+        topicsCollection.document(topicId)
+            .update(updateData as Map<String, Any>)
+            .addOnSuccessListener {
+                Log.e("hide topic", "hided successfully")
+                for (i in myTopics) {
+                    if (i.id == topicId) {
+                        i.hidden = true
+                        break
+                    }
+                }
+                myAdapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener { e ->
+                Log.e("hide topic", "hide failed")
+                // Handle the error and display an error message if necessary
+            }
+    }
+    private fun unhideTopic(topic: Topic) {
+        val topicsCollection = db.collection("topics")
+        val topicId = topic.id
+        val updateData = hashMapOf(
+            "hidden" to false
+        )
+        topicsCollection.document(topicId)
+            .update(updateData as Map<String, Any>)
+            .addOnSuccessListener {
+                Log.e("unhide topic", "unhided successfully")
+                for (i in myTopics) {
+                    if (i.id == topicId) {
+                        i.hidden = false
+                        break
+                    }
+                }
+                myAdapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener { e ->
+                Log.e("unhide topic", "unhide failed")
+                // Handle the error and display an error message if necessary
+            }
+    }
+
 }

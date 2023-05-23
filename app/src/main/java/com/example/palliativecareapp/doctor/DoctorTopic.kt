@@ -39,8 +39,9 @@ class DoctorTopic : AppCompatActivity() {
                     topic_name.text = name
                     topic_information.text = information
                     topic_description.text = description
-                    val storageImage = FirebaseStorage.getInstance().reference
-                    val storageRef = storageImage.child(logo!!)
+                    val storageRef = FirebaseStorage.getInstance().getReference()
+                        .child("topic_images")
+                        .child(logo)
                     storageRef.downloadUrl.addOnSuccessListener { uri ->
                         val imageUrl = uri.toString()
                         Picasso.with(this).load(imageUrl).into(topic_logo)

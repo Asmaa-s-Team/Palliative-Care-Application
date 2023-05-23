@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layoutDirection="rtl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:gravity="center_horizontal">
 
         <TextView
@@ -112,3 +119,81 @@
             android:visibility="gone"
             android:layout_centerInParent="true" />
         </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:paddingVertical="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/home"
+            android:text="الرئيسية"
+            android:drawableTop="@drawable/ic_home"
+            android:textColor="#AAAAAA"
+            android:drawableTint="#AAAAAA"
+            android:textStyle="normal"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginHorizontal="5dp"
+            android:layout_width="70dp"
+            android:layout_height="50dp"/>
+        <TextView
+            android:id="@+id/notifications"
+            android:text="الإشعارات"
+            android:drawableTop="@drawable/ic_baseline_notifications_24"
+            android:textColor="#AAAAAA"
+            android:layout_marginHorizontal="5dp"
+            android:drawableTint="#AAAAAA"
+            android:textStyle="normal"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_width="70dp"
+            android:layout_height="50dp"/>
+
+        <TextView
+            android:id="@+id/chat"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="5dp"
+            android:drawableTop="@drawable/ic_chat"
+            android:drawableTint="@color/primary"
+            android:gravity="center"
+            android:text="الدردشة"
+            android:textColor="@color/primary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/topics"
+            android:text="المقالات"
+            android:drawableTop="@drawable/ic_topic"
+            android:textStyle="normal"
+            android:textColor="#AAAAAA"
+            android:drawableTint="#AAAAAA"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginHorizontal="5dp"
+            android:layout_width="70dp"
+            android:layout_height="50dp"/>
+        <TextView
+            android:id="@+id/profile"
+            android:text="حسابي"
+            android:drawableTop="@drawable/ic_person"
+            android:textColor="#AAAAAA"
+            android:drawableTint="#AAAAAA"
+            android:textStyle="normal"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_width="70dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_height="50dp"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

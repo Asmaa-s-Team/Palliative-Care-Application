@@ -4,27 +4,27 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.palliativecareapp.R
-import kotlinx.android.synthetic.main.patient_topics.*
+import kotlinx.android.synthetic.main.patient_profile.*
 
-class PatientTopics : AppCompatActivity() {
+class PatientProfile : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.patient_topics)
+        setContentView(R.layout.patient_profile)
 
         home.setOnClickListener {
-            val intent = Intent(this@PatientTopics, PatientHome::class.java)
+            val intent = Intent(this@PatientProfile, PatientHome::class.java)
             startActivity(intent)
         }
         chat.setOnClickListener {
-            val intent = Intent(this@PatientTopics, PatientChat::class.java)
+            val intent = Intent(this@PatientProfile, PatientChat::class.java)
             startActivity(intent)
         }
         notifications.setOnClickListener {
-            val intent = Intent(this@PatientTopics, PatientNotifications::class.java)
+            val intent = Intent(this@PatientProfile, PatientNotifications::class.java)
             startActivity(intent)
         }
-        profile.setOnClickListener {
-            val intent = Intent(this@PatientTopics, PatientProfile::class.java)
+        topics.setOnClickListener {
+            val intent = Intent(this@PatientProfile, PatientTopics::class.java)
             startActivity(intent)
         }
     }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:layoutDirection="rtl"
-    tools:context=".patient.PatientHome">
+    tools:context=".doctor.DoctorAddTopic">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:text="إضافة مقال جديد"
                 android:textColor="@color/primary"
                 android:textSize="26dp"

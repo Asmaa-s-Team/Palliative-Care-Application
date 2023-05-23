@@ -6,15 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.palliativecareapp.R
-import com.example.palliativecareapp.models.Doctor
+import com.example.palliativecareapp.models.Patient
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_chat_search.view.*
 
-class DoctorAdapter (private val list: ArrayList<Doctor>, var context: Context) :
-    RecyclerView.Adapter<DoctorAdapter.ViewHolder>() {
+class PatientAdapter (private val list: ArrayList<Patient>, var context: Context) :
+    RecyclerView.Adapter<PatientAdapter.ViewHolder>() {
 
-    private var filteredItems: List<Doctor> = list
+    private var filteredItems: List<Patient> = list
     private var isFiltering: Boolean = false
     private lateinit var mlistener: OnItemClickListener
 
@@ -61,6 +61,7 @@ class DoctorAdapter (private val list: ArrayList<Doctor>, var context: Context) 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
     }
+
     fun filter(query: String) {
         filteredItems = if (query.isEmpty()) {
             isFiltering = false

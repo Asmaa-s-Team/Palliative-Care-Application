@@ -12,24 +12,53 @@ import com.example.palliativecareapp.adapters.DoctorAdapter
 import com.example.palliativecareapp.models.Doctor
 import com.example.palliativecareapp.mutualScreens.ChattingScreen
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.patient_chat.*
 
 class PatientChat : AppCompatActivity() {
+    val db = FirebaseFirestore.getInstance()
+    val doctors = ArrayList<Doctor>()
+    val myAdapter = DoctorAdapter(doctors, this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.patient_chat)
+
+        home.setOnClickListener {
+            val intent = Intent(this@PatientChat, PatientHome::class.java)
+            startActivity(intent)
+        }
+        notifications.setOnClickListener {
+            val intent = Intent(this@PatientChat, PatientNotifications::class.java)
+            startActivity(intent)
+        }
+        topics.setOnClickListener {
+            val intent = Intent(this@PatientChat, PatientTopics::class.java)
+            startActivity(intent)
+        }
+        profile.setOnClickListener {
+            val intent = Intent(this@PatientChat, PatientProfile::class.java)
+            startActivity(intent)
+        }
 
         all_patients.setOnClickListener {
             val intent = Intent(this@PatientChat, GroupChattingScreen::class.java)
             startActivity(intent)
         }
 
-        val doctors = ArrayList<Doctor>()
-        val myAdapter = DoctorAdapter(doctors, this)
+        close_search.setOnClickListener {
+            search_text.text = null
+            clearSearch()
+        }
+
+        search_btn.setOnClickListener {
+            if (search_text.text != null) {
+                searchFirestore(search_text.text.toString())
+            }
+        }
+
         RV_doctors.layoutManager = LinearLayoutManager(this)
         RV_doctors.adapter = myAdapter
 
-        val db = FirebaseFirestore.getInstance()
         db.collection("doctors")
             .get()
             .addOnSuccessListener { result ->
@@ -37,7 +66,7 @@ class PatientChat : AppCompatActivity() {
                     doctors.add(
                         Doctor(
                             document.id,
-                            document.get("name") as HashMap<Any, Any>,
+                            document.getString("name").toString(),
                             document.getString("image").toString(),
                         )
                     )
@@ -75,6 +104,24 @@ class PatientChat : AppCompatActivity() {
                 startActivity(intent)
             }
         })
-
+    }
+    private fun searchFirestore(query: String) {
+        val startValue = query
+        val endValue = query + "\uf8ff"
+        val collectionRef = db.collection("doctors")
+        val queryRef: Query = collectionRef.orderBy("name")
+            .whereGreaterThanOrEqualTo("name", startValue)
+            .whereLessThanOrEqualTo("name", endValue)
+        queryRef.get().addOnSuccessListener { querySnapshot ->
+            querySnapshot.documents.map { document ->
+                document.toObject(Doctor::class.java)
+            }
+            myAdapter.filter(query)
+        }
+    }
+    private fun clearSearch() {
+        if (myAdapter.isFiltering()) {
+            myAdapter.filter("") // Pass an empty query to clear the filter
+        }
     }
 }

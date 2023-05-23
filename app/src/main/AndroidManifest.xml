@@ -13,12 +13,8 @@
         android:theme="@style/Theme.PalliativeCareApp"
         tools:targetApi="31">
         <activity
-            android:name=".patient.PatientMain"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".patient.PatientProfile"
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -47,7 +43,6 @@
         <activity
             android:name=".patient.PatientHome"
             android:exported="false">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -66,6 +61,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
 
         <activity
             android:name=".doctor.DoctorTopic"
@@ -123,6 +119,14 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
+            android:name=".doctor.DoctorProfile"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
 
         <activity
             android:name=".mutualScreens.ChattingScreen"
@@ -132,9 +136,15 @@
                 android:value="" />
         </activity>
 
+
         <activity
             android:name=".authentication.MainActivity"
-            android:exported="false">
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -148,13 +158,6 @@
         </activity>
         <activity
             android:name=".authentication.RegisterDoctor"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".authentication.Profile"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

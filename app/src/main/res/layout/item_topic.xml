@@ -7,6 +7,7 @@
     android:layoutDirection="rtl">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         app:cardBackgroundColor="#FAFDFF"
         app:cardCornerRadius="10dp"
         android:layout_width="match_parent"
