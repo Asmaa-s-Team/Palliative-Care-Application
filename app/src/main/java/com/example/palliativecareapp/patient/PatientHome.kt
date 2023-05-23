@@ -64,7 +64,6 @@ class PatientHome : AppCompatActivity() {
                             document.getString("logo").toString(),
                             document.getString("name").toString(),
                             document.getString("description").toString(),
-                            document.getBoolean("hidden")!!,
                         )
                     )
                     Log.e("success", "${document.id} => ${document.data}")

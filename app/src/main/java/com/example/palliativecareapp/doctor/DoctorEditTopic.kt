@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.doctor_edit_topic.imageView
 import kotlinx.android.synthetic.main.doctor_edit_topic.topic_description
 import kotlinx.android.synthetic.main.doctor_edit_topic.topic_info
 import kotlinx.android.synthetic.main.doctor_edit_topic.topic_title
+import kotlinx.android.synthetic.main.doctor_topic.*
 import kotlinx.android.synthetic.main.item_chat_search.*
 import java.util.*
 
@@ -51,8 +52,9 @@ class DoctorEditTopic : AppCompatActivity() {
                     topic_title.setText(name)
                     topic_info.setText(information)
                     topic_description.setText(description)
-                    val storageImage = FirebaseStorage.getInstance().reference
-                    val storageRef = storageImage.child(logo!!)
+                    val storageRef = FirebaseStorage.getInstance().getReference()
+                        .child("topic_images")
+                        .child(logo)
                     storageRef.downloadUrl.addOnSuccessListener { uri ->
                         val imageUrl = uri.toString()
                         Picasso.with(this).load(imageUrl).into(imageView)
@@ -85,6 +87,19 @@ class DoctorEditTopic : AppCompatActivity() {
             imageView.setImageURI(img)
         }
     }
+    fun deleteOldImage(){
+        FirebaseStorage.getInstance().getReference()
+            .child("topic_images")
+            .child(logo)
+            .delete()
+            .addOnSuccessListener {
+                Log.d("deleteOldImage", "Image deleted successfully.")
+            }
+            .addOnFailureListener { exception ->
+                Log.d("deleteOldImage", "Failed to delete image: ${exception.message}")
+            }
+    }
+
         fun editTopic(title: String, description: String, information: String){
             var map = hashMapOf(
                 "name" to title,
@@ -106,6 +121,7 @@ class DoctorEditTopic : AppCompatActivity() {
                 }
         }
     private fun uploadImageToFirebase() {
+        deleteOldImage()
         val randomNumber = UUID.randomUUID().toString()
         val storageRef = FirebaseStorage.getInstance().getReference("topic_images")
         val imgRef = storageRef.child("image" + randomNumber)

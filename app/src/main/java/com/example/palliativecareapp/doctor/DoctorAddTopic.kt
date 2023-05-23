@@ -64,6 +64,7 @@ class DoctorAddTopic : AppCompatActivity() {
             "description" to description,
             "information" to information,
             "hidden" to false,
+            "subscription" to false,
         )
         db.collection("topics")
             .add(topic)

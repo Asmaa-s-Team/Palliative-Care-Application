@@ -55,7 +55,7 @@ class PatientProfile : AppCompatActivity() {
         val id = user!!.uid
 
         db = Firebase.firestore
-        db.collection("doctors").document(id!!).get().addOnSuccessListener { result ->
+        db.collection("patients").document(id!!).get().addOnSuccessListener { result ->
             if (result != null ) {
                 var data = result.data!!
                 name = data.get("name") as String
@@ -66,7 +66,7 @@ class PatientProfile : AppCompatActivity() {
                 emailText.text = "$email"
                 phoneText.text = "$phone"
                 val storageRef = FirebaseStorage.getInstance().getReference()
-                    .child("doctors")
+                    .child("patients")
                     .child(image)
                 storageRef.downloadUrl.addOnSuccessListener { uri ->
                     val imageUrl = uri.toString()
@@ -81,6 +81,7 @@ class PatientProfile : AppCompatActivity() {
             val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
             editor.putString("patient", "")
+            editor.putString("doctor", "")
             editor.apply()
             FirebaseAuth.getInstance().signOut()
             val i = Intent(this, MainActivity::class.java)

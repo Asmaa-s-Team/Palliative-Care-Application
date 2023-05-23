@@ -27,6 +27,7 @@ class RegisterDoctor : AppCompatActivity() {
     lateinit var sharedPreferences : SharedPreferences
     lateinit var date : String
     private lateinit var auth: FirebaseAuth
+
     override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
@@ -42,7 +43,7 @@ class RegisterDoctor : AppCompatActivity() {
         setContentView(R.layout.doctor_register)
 
         sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-        initDatePicker();
+        initDatePicker()
         dateButton = findViewById(R.id.datePickerBtn);
         dateButton!!.setText(getTodaysDate());
 
@@ -84,7 +85,6 @@ class RegisterDoctor : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     Log.d("User:createUser", "createUserWithEmail:success")
                     val user = auth.currentUser
 
@@ -102,8 +102,8 @@ class RegisterDoctor : AppCompatActivity() {
                         "phone" to phone.text.toString(),
                         "birth" to date,
                         "email" to user.email.toString(),
-                        "password" to password.toString(),
-                        "image" to "",
+                        "password" to password,
+                        "image" to "person.jpg",
                     )
 
                     userRef.set(userInfo)

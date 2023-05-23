@@ -19,6 +19,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.doctor_home.*
 import kotlinx.android.synthetic.main.doctor_home.chat
 import kotlinx.android.synthetic.main.doctor_home.notifications
@@ -83,7 +84,7 @@ class DoctorHome : AppCompatActivity() {
         var doctorId = "b7iSVSfKFCQlSdT1hpGyf5G3oIm2"
         val db = FirebaseFirestore.getInstance()
         val query = db.collection("topics")
-            .whereEqualTo("autherId", doctorId)
+            .whereEqualTo("autherId", id)
         query.get()
             .addOnSuccessListener { querySnapshot ->
                 for (document in querySnapshot.documents) {
@@ -93,7 +94,6 @@ class DoctorHome : AppCompatActivity() {
                             document.getString("logo").toString(),
                             document.getString("name").toString(),
                             document.getString("description").toString(),
-                            document.getBoolean("hidden")!!,
                         )
                     )
                     Log.e("success", "${document.id} => ${document.data}")
@@ -156,10 +156,22 @@ class DoctorHome : AppCompatActivity() {
             }
             })
     }
+    fun deleteTopicImage(logo: String){
+        FirebaseStorage.getInstance().getReference()
+            .child("topic_images")
+            .child(logo)
+            .delete()
+            .addOnSuccessListener {
+                Log.d("deleteOldImage", "Image deleted successfully.")
+            }
+            .addOnFailureListener { exception ->
+                Log.d("deleteOldImage", "Failed to delete image: ${exception.message}")
+            }
+    }
     private fun deleteTopic(topic: Topic) {
-        val topicsCollection = db.collection("topics")
+        deleteTopicImage(topic.logo)
         val topicId = topic.id
-        topicsCollection.document(topicId).delete()
+        db.collection("topics").document(topicId).delete()
             .addOnSuccessListener {
                 Log.e("delete topic", "deleted successfully")
                 for (i in myTopics) {

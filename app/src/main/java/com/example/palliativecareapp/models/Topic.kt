@@ -8,14 +8,16 @@ class Topic {
     var information: String = ""
     var autherId: String = ""
     var hidden: Boolean = false
+    var subscription: Boolean = false
 
 
-    constructor(id: String, logo: String, name: String, description: String, hidden: Boolean) {
+    constructor(id: String, logo: String, name: String, description: String) {
         this.id = id
         this.logo = logo
         this.name = name
         this.description = description
-        this.hidden = hidden
+        this.hidden = false
+        this.subscription = false
     }
 
     constructor()
