@@ -44,6 +44,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx:24.5.0'
     implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
     implementation 'com.google.firebase:firebase-messaging-ktx:23.1.2'
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
     constraints {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
             because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")

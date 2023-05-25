@@ -100,7 +100,7 @@
             android:ems="10"
             android:gravity="center_vertical"
             android:textSize="18sp"
-            android:textColor="#566E8A"
+            android:textColor="@color/primary"
             android:layout_margin="10dp"
             android:text="حدد تاريخ الميلاد"
             android:minHeight="48dp" />

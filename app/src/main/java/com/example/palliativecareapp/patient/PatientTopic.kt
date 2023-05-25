@@ -51,12 +51,13 @@ class PatientTopic : AppCompatActivity() {
                     autherId = result.getString("autherId").toString()
                     topic_name.text = name
                     topic_info.text = information
-                    val storageImage = FirebaseStorage.getInstance().reference
+                    val storageImage = FirebaseStorage.getInstance().getReference().child("topic_images")
                     val storageRef = storageImage.child(logo!!)
                     storageRef.downloadUrl.addOnSuccessListener { uri ->
                         val imageUrl = uri.toString()
                         Picasso.with(this).load(imageUrl).into(topic_image)
                     }
+
                     db.collection("doctors").document(autherId).get()
                         .addOnSuccessListener { result ->
                             if (result != null) {

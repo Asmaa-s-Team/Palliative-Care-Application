@@ -80,7 +80,7 @@ class LoginPatient : AppCompatActivity() {
             startActivity(i)
         }
         if(patient!!.equals("register")) {
-            var i = Intent(this, LoginDoctor::class.java)
+            var i = Intent(this, LoginPatient::class.java)
             startActivity(i)
         }
     }

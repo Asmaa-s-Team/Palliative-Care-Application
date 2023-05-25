@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.patient_register.*
 import java.util.*
 
@@ -55,6 +56,8 @@ class RegisterPatient : AppCompatActivity() {
                     Log.e("user password", password.toString())
                     Log.e("user confirm password", confirmPassword.toString())
                     createNewAccount(email.toString(), password.toString())
+                    var i = Intent(this, LoginPatient::class.java)
+                    startActivity(i)
                 }
                 else{
                     Toast.makeText(baseContext, "Password not Match.",
@@ -89,14 +92,17 @@ class RegisterPatient : AppCompatActivity() {
                     var middle = middle.text.toString()
                     var last = last.text.toString()
 
+                    var token = FirebaseMessaging.getInstance().token
                     val userInfo = hashMapOf(
                         "name" to "$first $middle $last",
                         "address" to address.text.toString(),
                         "phone" to phone.text.toString(),
                         "birth" to date,
                         "email" to user.email.toString(),
-                        "password" to password.toString(),
+                        "password" to password,
                         "image" to "",
+                        "token" to token.result,
+                        "subscription" to false,
                     )
 
                     userRef.set(userInfo)
