@@ -30,4 +30,16 @@ class PatientNotifications : AppCompatActivity() {
         }
         analytics.screenTrack("PatientNotifications","PatientNotifications")
     }
+
+    override fun onResume() {
+        super.onResume()
+        //start
+        analytics.trackScreenView("PatientNotifications")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        //end
+        analytics.trackScreenDuration()
+    }
 }

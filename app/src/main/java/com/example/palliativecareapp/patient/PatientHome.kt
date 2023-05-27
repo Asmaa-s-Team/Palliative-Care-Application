@@ -101,6 +101,18 @@ class PatientHome : AppCompatActivity() {
         analytics.screenTrack("PatientHome","PatientHome")
     }
 
+    override fun onResume() {
+        super.onResume()
+        //start
+        analytics.trackScreenView("PatientHome")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        //end
+        analytics.trackScreenDuration()
+    }
+
     private fun searchFirestore(query: String) {
         val startValue = query
         val endValue = query + "\uf8ff"

@@ -108,6 +108,18 @@ class PatientChat : AppCompatActivity() {
         })
         analytics.screenTrack("PatientChat","PatientChat")
     }
+
+    override fun onResume() {
+        super.onResume()
+        //start
+        analytics.trackScreenView("PatientChat")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        //end
+        analytics.trackScreenDuration()
+    }
     private fun searchFirestore(query: String) {
         val startValue = query
         val endValue = query + "\uf8ff"

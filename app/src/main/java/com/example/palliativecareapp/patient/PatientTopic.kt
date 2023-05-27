@@ -129,6 +129,18 @@ class PatientTopic : AppCompatActivity() {
         analytics.screenTrack("PatientTopic","PatientTopic")
     }
 
+    override fun onResume() {
+        super.onResume()
+        //start
+        analytics.trackScreenView("PatientTopic")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        //end
+        analytics.trackScreenDuration()
+    }
+
     fun getComments() {
         var myAdapter : CommentAdapter
         var comments = ArrayList<Comment>()

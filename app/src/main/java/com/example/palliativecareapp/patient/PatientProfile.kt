@@ -90,4 +90,16 @@ class PatientProfile : AppCompatActivity() {
         }
         analytics.screenTrack("PatientProfile","PatientProfile")
     }
+
+    override fun onResume() {
+        super.onResume()
+        //start
+        analytics.trackScreenView("PatientProfile")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        //end
+        analytics.trackScreenDuration()
+    }
 }

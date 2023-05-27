@@ -81,6 +81,18 @@ class GroupChattingScreen : AppCompatActivity() {
         analytics.screenTrack("GroupChattingScreen","GroupChattingScreen")
         }
 
+    override fun onResume() {
+        super.onResume()
+        //start
+        analytics.trackScreenView("GroupChattingScreen")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        //end
+        analytics.trackScreenDuration()
+    }
+
         private fun sendMessage(messageText: String) {
             val timestamp = System.currentTimeMillis()
             val sdf = SimpleDateFormat("YYYY-MM-dd HH:mm", Locale.getDefault())

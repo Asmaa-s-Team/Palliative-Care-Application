@@ -31,4 +31,16 @@ class PatientTopics : AppCompatActivity() {
         }
         analytics.screenTrack("PatientTopics","PatientTopics")
     }
+
+    override fun onResume() {
+        super.onResume()
+        //start
+        analytics.trackScreenView("PatientTopics")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        //end
+        analytics.trackScreenDuration()
+    }
 }
