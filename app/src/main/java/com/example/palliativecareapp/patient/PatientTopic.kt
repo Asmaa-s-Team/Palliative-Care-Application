@@ -1,5 +1,6 @@
 package com.example.palliativecareapp.patient
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.palliativecareapp.R
 import com.example.palliativecareapp.adapters.CommentAdapter
 import com.example.palliativecareapp.models.Comment
+import com.example.palliativecareapp.mutualScreens.ChattingScreen
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -41,6 +43,16 @@ class PatientTopic : AppCompatActivity() {
         topicId = intent.getStringExtra("topicId")!!
 
         db = FirebaseFirestore.getInstance()
+
+        db.collection("topic_subscription").whereEqualTo("patient_id", userId).whereEqualTo("topic_id", topicId).get()
+            .addOnSuccessListener { result ->
+                if (result.isEmpty) {
+                    subscription_btn.setText("اشتراك")
+                }else{
+                    subscription_btn.setText("إلغاء الاشتراك")
+                }
+            }
+
         db.collection("topics").document(topicId!!).get()
             .addOnSuccessListener { result->
                 if (result != null ) {
@@ -84,6 +96,35 @@ class PatientTopic : AppCompatActivity() {
             }
         }
 
+        subscription_btn.setOnClickListener {
+            db.collection("topic_subscription").whereEqualTo("patient_id", userId).whereEqualTo("topic_id", topicId).get()
+                .addOnSuccessListener { result ->
+                    if(result.isEmpty) {
+                        subscription_btn.setText("إلغاء الاشتراك")
+                        Toast.makeText(this, "ستصلك كل الإشعارات التي تخص هذا المقال", Toast.LENGTH_SHORT).show()
+                        var map = hashMapOf<String, Any>(
+                            "patient_id" to userId,
+                            "topic_id" to topicId,
+                        )
+                        db.collection("topic_subscription").add(map).addOnSuccessListener {
+                            Log.e("subscription ", "Subscription completed successfully")
+                        }.addOnFailureListener {
+                            Log.e("subscription ", "Subscription failed")
+                        }
+                    }else{
+                        Toast.makeText(this, "ستتوقف الإشعارات عن الوصول", Toast.LENGTH_SHORT).show()
+                        subscription_btn.setText("اشتراك")
+                        for (document in result) {
+                            document.reference.delete()
+                        }
+                    }
+                }
+        }
+        chat_btn.setOnClickListener{
+            val intent = Intent(this@PatientTopic, ChattingScreen::class.java)
+            intent.putExtra("userId", userId)
+            startActivity(intent)
+        }
     }
 
     fun getComments() {

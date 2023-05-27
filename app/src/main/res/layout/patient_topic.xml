@@ -38,7 +38,7 @@
                     android:id="@+id/doctor_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="د. محمد الشرفا"
+                    android:text=""
                 android:layout_marginTop="5dp"
                     android:textColor="@color/primary"
                     android:textSize="18dp" />
@@ -176,7 +176,7 @@
                     android:textSize="20dp"/>
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/topic_logo"
+                    android:id="@+id/chat_btn"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     app:shapeAppearanceOverlay="@style/circular2"

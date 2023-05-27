@@ -102,7 +102,6 @@ class RegisterPatient : AppCompatActivity() {
                         "password" to password,
                         "image" to "",
                         "token" to token.result,
-                        "subscription" to false,
                     )
 
                     userRef.set(userInfo)
