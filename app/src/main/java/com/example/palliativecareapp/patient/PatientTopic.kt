@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.palliativecareapp.Analytics
 import com.example.palliativecareapp.R
 import com.example.palliativecareapp.adapters.CommentAdapter
 import com.example.palliativecareapp.models.Comment
@@ -32,7 +33,7 @@ class PatientTopic : AppCompatActivity() {
     lateinit var logo : String
     lateinit var autherId : String
     lateinit var userId : String
-
+    var analytics = Analytics()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.patient_topic)
@@ -125,6 +126,7 @@ class PatientTopic : AppCompatActivity() {
             intent.putExtra("userId", userId)
             startActivity(intent)
         }
+        analytics.screenTrack("PatientTopic","PatientTopic")
     }
 
     fun getComments() {
@@ -181,4 +183,5 @@ class PatientTopic : AppCompatActivity() {
                 Log.w("add success", "Error adding document", e)
             }
     }
+
 }

@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.palliativecareapp.Analytics
 import com.example.palliativecareapp.R
 import com.example.palliativecareapp.authentication.MainActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -28,7 +29,7 @@ class PatientProfile : AppCompatActivity() {
     var email = ""
     var phone = ""
     var image = ""
-
+    var analytics = Analytics()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.patient_profile)
@@ -87,5 +88,6 @@ class PatientProfile : AppCompatActivity() {
             val i = Intent(this, MainActivity::class.java)
             startActivity(i)
         }
+        analytics.screenTrack("PatientProfile","PatientProfile")
     }
 }

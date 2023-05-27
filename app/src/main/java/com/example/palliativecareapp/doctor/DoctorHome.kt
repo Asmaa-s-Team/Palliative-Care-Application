@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.palliativecareapp.Analytics
 import com.example.palliativecareapp.R
 import com.example.palliativecareapp.adapters.DoctorTopicAdapter
 import com.example.palliativecareapp.adapters.PatientTopicAdapter
@@ -34,7 +35,7 @@ class DoctorHome : AppCompatActivity() {
     lateinit var db : FirebaseFirestore
     val myTopics = ArrayList<Topic>()
     var myAdapter = DoctorTopicAdapter(myTopics, this)
-
+    var analytics = Analytics()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.doctor_home)
@@ -55,7 +56,18 @@ class DoctorHome : AppCompatActivity() {
             val intent = Intent(this@DoctorHome, DoctorProfile::class.java)
             startActivity(intent)
         }
+        comment_analytics.setOnClickListener {
 
+        }
+        topics_analytics.setOnClickListener {
+
+        }
+        subscription_analytics.setOnClickListener {
+
+        }
+        attachment_analytics.setOnClickListener {
+
+        }
         sharedPreferences = this.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
         auth = Firebase.auth
         var user = auth.currentUser
@@ -155,6 +167,7 @@ class DoctorHome : AppCompatActivity() {
                 dialog.show()
             }
             })
+        analytics.screenTrack("DoctorHome","DoctorHome")
     }
     fun deleteTopicImage(logo: String){
         FirebaseStorage.getInstance().getReference()

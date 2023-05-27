@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.palliativecareapp.Analytics
 import com.example.palliativecareapp.R
 import com.example.palliativecareapp.adapters.CommentAdapter
 import com.example.palliativecareapp.models.Comment
@@ -21,7 +22,7 @@ class DoctorTopic : AppCompatActivity() {
     lateinit var description : String
     lateinit var information : String
     lateinit var logo : String
-
+    var analytics = Analytics()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.doctor_topic)
@@ -87,6 +88,7 @@ class DoctorTopic : AppCompatActivity() {
                 Log.e("error", "Error getting comments", exception)
                 Toast.makeText(this, "There is an error getting comments", Toast.LENGTH_SHORT)
             }
+        analytics.screenTrack("DoctorTopic","DoctorTopic")
 
     }
 }

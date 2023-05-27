@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.palliativecareapp.Analytics
 import com.example.palliativecareapp.R
 import com.example.palliativecareapp.adapters.GroupMessageAdapter
 import com.example.palliativecareapp.models.GroupMessage
@@ -31,7 +32,7 @@ class GroupChattingScreen : AppCompatActivity() {
     private val messagesList = mutableListOf<GroupMessage>()
     private lateinit var auth: FirebaseAuth
     lateinit var sharedPreferences : SharedPreferences
-
+    var analytics = Analytics()
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -77,6 +78,7 @@ class GroupChattingScreen : AppCompatActivity() {
                 override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
                 override fun onCancelled(error: DatabaseError) {}
             })
+        analytics.screenTrack("GroupChattingScreen","GroupChattingScreen")
         }
 
         private fun sendMessage(messageText: String) {

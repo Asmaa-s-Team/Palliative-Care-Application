@@ -9,10 +9,10 @@ import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
-import androidx.work.Worker
-import androidx.work.WorkerParameters
+//import androidx.work.OneTimeWorkRequest
+//import androidx.work.WorkManager
+//import androidx.work.Worker
+//import androidx.work.WorkerParameters
 import com.example.palliativecareapp.authentication.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -32,7 +32,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             // Check if data needs to be processed by long running job
             if (needsToBeScheduled()) {
                 // For long-running tasks (10 seconds or more) use WorkManager.
-                scheduleJob()
+               // scheduleJob()
             } else {
                 // Handle message within 10 seconds
                 handleNow()
@@ -67,15 +67,15 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
     // [END on_new_token]
 
-    private fun scheduleJob() {
-        // [START dispatch_job]
-        val work = OneTimeWorkRequest.Builder(MyWorker::class.java)
-            .build()
-        WorkManager.getInstance(this)
-            .beginWith(work)
-            .enqueue()
-        // [END dispatch_job]
-    }
+//    private fun scheduleJob() {
+//        // [START dispatch_job]
+//        val work = OneTimeWorkRequest.Builder(MyWorker::class.java)
+//            .build()
+//        WorkManager.getInstance(this)
+//            .beginWith(work)
+//            .enqueue()
+//        // [END dispatch_job]
+//    }
 
     private fun handleNow() {
         Log.d(TAG, "Short lived task is done.")
@@ -127,10 +127,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         private const val TAG = "MyFirebaseMsgService"
     }
 
-    internal class MyWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
-        override fun doWork(): Result {
-            // TODO(developer): add long running task here.
-            return Result.success()
-        }
-    }
+//    internal class MyWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {
+//        override fun doWork(): Result {
+//            // TODO(developer): add long running task here.
+//            return Result.success()
+//        }
+//    }
 }

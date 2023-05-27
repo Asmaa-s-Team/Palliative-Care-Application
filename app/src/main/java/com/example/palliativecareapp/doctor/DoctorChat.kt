@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.palliativecareapp.Analytics
 import com.example.palliativecareapp.R
 import com.example.palliativecareapp.adapters.DoctorAdapter
 import com.example.palliativecareapp.adapters.PatientAdapter
@@ -31,7 +32,7 @@ class DoctorChat : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance()
     val patients = ArrayList<Patient>()
     val myAdapter = PatientAdapter(patients, this)
-
+    var analytics = Analytics()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.doctor_chat)
@@ -112,6 +113,7 @@ class DoctorChat : AppCompatActivity() {
                 startActivity(intent)
             }
         })
+        analytics.screenTrack("DoctorChat","DoctorChat")
     }
     private fun searchFirestore(query: String) {
         val startValue = query
