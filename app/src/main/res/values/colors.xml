@@ -11,5 +11,7 @@
     <color name="secondary">#144272</color>
     <color name="tertiary">#205295</color>
     <color name="neutral">#2C74B3</color>
+    <color name="orange">#FF9800</color>
+    <color name="green">#4CAF50</color>
     <color name="hidden_card_color">#DADADA</color>
 </resources>

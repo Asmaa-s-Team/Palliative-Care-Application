@@ -11,10 +11,12 @@ import java.io.IOException
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.example.palliativecareapp.R
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.doctor_add_topic.*
 import kotlinx.android.synthetic.main.doctor_add_topic.imageView
 import kotlinx.android.synthetic.main.doctor_add_topic.topic_description
@@ -29,7 +31,7 @@ class DoctorAddTopic : AppCompatActivity() {
     lateinit var userId : String
     lateinit var topicId : String
     var img:Uri? = null
-
+    lateinit var uri : Uri
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.doctor_add_topic)
@@ -54,6 +56,32 @@ class DoctorAddTopic : AppCompatActivity() {
                 topic_description.text = null
                 topic_info.text = null
             }
+        }
+        topic_video.setOnClickListener {
+            val intent = Intent(
+                Intent.ACTION_PICK,
+                MediaStore.Video.Media.EXTERNAL_CONTENT_URI)
+            intent.setType("video/*")
+            startActivityForResult(Intent.createChooser(intent, "Select VIDEO"), 100)
+        }
+        topic_chart.setOnClickListener {
+            val intent = Intent (this,Chart::class.java)
+            startActivity(intent)
+        }
+        topic_pdf.setOnClickListener {
+            val intent = Intent()
+            intent.setType("pdf/*")
+            Intent.ACTION_GET_CONTENT
+            MediaStore.Files.FileColumns.MEDIA_TYPE_DOCUMENT
+            startActivityForResult(Intent.createChooser(intent, "Select PDF"), 100)
+
+        }
+        topic_image.setOnClickListener {
+            val intent = Intent(
+                Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            intent.setType("image/*")
+            startActivityForResult(Intent.createChooser(intent, "Select IMAGE"), 100)
         }
     }
 
@@ -84,9 +112,20 @@ class DoctorAddTopic : AppCompatActivity() {
         if (resultCode == RESULT_OK && requestCode == 100){
             img = data!!.data!!
             imageView.setImageURI(img)
+            uri = data!!.data!!
+//            uriTxt.setText(uri.toString())
+            upload()
         }
     }
-
+    private fun upload() {
+        var mStorage = Firebase.storage.getReference("Uploads")
+        val pdfref = mStorage.child(uri.lastPathSegment.toString())
+        pdfref.putFile(uri).addOnSuccessListener {
+            Toast.makeText(this, "Upload", Toast.LENGTH_LONG)
+        }.addOnFailureListener {
+            Toast.makeText(this,"Failed", Toast.LENGTH_LONG)
+        }
+    }
     // Function to upload the selected image to Firebase Storage
     private fun uploadImageToFirebase() {
         val randomNumber = UUID.randomUUID().toString()
