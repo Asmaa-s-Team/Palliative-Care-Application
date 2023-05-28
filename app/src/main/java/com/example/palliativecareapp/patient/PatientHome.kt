@@ -12,14 +12,54 @@ import com.example.palliativecareapp.R
 import com.example.palliativecareapp.adapters.PatientTopicAdapter
 import com.example.palliativecareapp.models.Topic
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.patient_home.*
+import kotlin.math.log
 
 class PatientHome : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance()
     lateinit var myAdapter: PatientTopicAdapter
     var myTopics = ArrayList<Topic>()
     var analytics = Analytics()
+    var listenerRegistration: ListenerRegistration? = null
+    override fun onStart() {
+        super.onStart()
+        val query = db.collection("topics").whereEqualTo("hidden",false)
+        listenerRegistration = query.addSnapshotListener{
+            value,error ->
+            if (error != null){
+                Log.e("Listener","error")
+                return@addSnapshotListener
+            }
+            myTopics.clear()
+            if (value != null && !value.isEmpty){
+                for (document in value!!.documents){
+                    myTopics.add(
+                        Topic(document.id,document.getString("logo").toString(),
+                            document.getString("name").toString(),
+                            document.getString("description").toString()),)
+                    Log.e("Listener","success")
+                }
+            }
+            else{
+                Log.e("Listener","There is NO DATA ...")
+            }
+            myAdapter.notifyDataSetChanged()
+            if (myTopics.isEmpty()) {
+                progressBar.isIndeterminate = true
+                progressBar.visibility = View.VISIBLE
+            } else {
+                progressBar.isIndeterminate = false
+                progressBar.visibility = View.GONE
+            }
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        listenerRegistration?.remove()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.patient_home)
@@ -54,40 +94,6 @@ class PatientHome : AppCompatActivity() {
             if (search_text.text != null) {
                 searchFirestore(search_text.text.toString())
             }
-        }
-
-        db.collection("topics").whereEqualTo("hidden", false).get()
-            .addOnSuccessListener { querySnapshot ->
-                for (document in querySnapshot.documents) {
-                    myTopics.add(
-                        Topic(
-                            document.id,
-                            document.getString("logo").toString(),
-                            document.getString("name").toString(),
-                            document.getString("description").toString(),
-                        )
-                    )
-                    Log.e("success", "${document.id} => ${document.data}")
-                }
-                myAdapter.notifyDataSetChanged()
-                if (myTopics.isEmpty()) {
-                    progressBar.isIndeterminate = true
-                    progressBar.visibility = View.VISIBLE
-                } else {
-                    progressBar.isIndeterminate = false
-                    progressBar.visibility = View.GONE
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.e("error", "Error getting topics", exception)
-                Toast.makeText(this, "There is an error getting topics", Toast.LENGTH_SHORT)
-            }
-        if (myTopics.isEmpty()) {
-            progressBar.isIndeterminate = true
-            progressBar.visibility = View.VISIBLE
-        } else {
-            progressBar.isIndeterminate = false
-            progressBar.visibility = View.GONE
         }
 
         myAdapter.onItemClickListener(object : PatientTopicAdapter.OnItemClickListener {
