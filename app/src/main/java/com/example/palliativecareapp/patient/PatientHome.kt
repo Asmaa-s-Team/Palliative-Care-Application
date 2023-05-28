@@ -100,6 +100,7 @@ class PatientHome : AppCompatActivity() {
             override fun onItemClick(position: Int) {
                 val intent = Intent(this@PatientHome, PatientTopic::class.java)
                 intent.putExtra("topicId", myTopics[position].id)
+                analytics.selectContent("${myTopics[position].id}","${myTopics[position].name}","TopicCard")
                 print(myTopics[position].id)
                 startActivity(intent)
             }

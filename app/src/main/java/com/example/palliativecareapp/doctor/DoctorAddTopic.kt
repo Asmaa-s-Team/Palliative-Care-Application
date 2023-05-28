@@ -62,7 +62,7 @@ class DoctorAddTopic : AppCompatActivity() {
                 Intent.ACTION_PICK,
                 MediaStore.Video.Media.EXTERNAL_CONTENT_URI)
             intent.setType("video/*")
-            startActivityForResult(Intent.createChooser(intent, "Select VIDEO"), 100)
+            startActivityForResult(Intent.createChooser(intent, "Select VIDEO"), 200)
         }
         topic_chart.setOnClickListener {
             val intent = Intent (this,Chart::class.java)
@@ -73,7 +73,7 @@ class DoctorAddTopic : AppCompatActivity() {
             intent.setType("pdf/*")
             Intent.ACTION_GET_CONTENT
             MediaStore.Files.FileColumns.MEDIA_TYPE_DOCUMENT
-            startActivityForResult(Intent.createChooser(intent, "Select PDF"), 100)
+            startActivityForResult(Intent.createChooser(intent, "Select PDF"), 300)
 
         }
         topic_image.setOnClickListener {
@@ -81,7 +81,7 @@ class DoctorAddTopic : AppCompatActivity() {
                 Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             intent.setType("image/*")
-            startActivityForResult(Intent.createChooser(intent, "Select IMAGE"), 100)
+            startActivityForResult(Intent.createChooser(intent, "Select IMAGE"), 400)
         }
     }
 
@@ -113,14 +113,14 @@ class DoctorAddTopic : AppCompatActivity() {
             img = data!!.data!!
             imageView.setImageURI(img)
             uri = data!!.data!!
-//            uriTxt.setText(uri.toString())
+//            imageView.setText(uri.toString())
             upload()
         }
     }
     private fun upload() {
         var mStorage = Firebase.storage.getReference("Uploads")
-        val pdfref = mStorage.child(uri.lastPathSegment.toString())
-        pdfref.putFile(uri).addOnSuccessListener {
+        val ref = mStorage.child(uri.lastPathSegment.toString())
+        ref.putFile(uri).addOnSuccessListener {
             Toast.makeText(this, "Upload", Toast.LENGTH_LONG)
         }.addOnFailureListener {
             Toast.makeText(this,"Failed", Toast.LENGTH_LONG)
